@@ -1,0 +1,149 @@
+\subsection{Typy a charakteristika rozhraní}
+
+\subsubsection{Rozhraní EIDE}
+
+\paragraph{Vznik}
+EIDE (Enhanced Integrated Drive Electronics) je rozšířením původního IDE rozhraní, které bylo vyvinuto v polovině 90. let společností Western Digital. EIDE bylo vytvořeno s cílem zvýšit výkon a kapacitu úložišť ve srovnání s původním IDE.
+
+\paragraph{Složení}
+EIDE rozhraní zahrnuje:
+\begin{itemize}
+\item \textbf{40pinový konektor}: Pro připojení pevného disku nebo optické mechaniky.
+\item \textbf{Kabel}: Plochý kabel umožňující připojení až dvou zařízení na jeden řadič.
+\item \textbf{Řadič}: Integrovaný obvod na základní desce nebo jako samostatná karta.
+\end{itemize}
+
+\paragraph{Komunikační módy}
+EIDE podporuje několik komunikačních módů:
+\begin{itemize}
+\item \textbf{PIO (Programmed Input/Output)}: Pět módů (0 až 4) s přenosovými rychlostmi od 3,3 MB/s do 16,7 MB/s.
+\item \textbf{DMA (Direct Memory Access)}: Tři módy (0 až 2) s rychlostmi od 4,2 MB/s do 16,7 MB/s.
+\item \textbf{UDMA (Ultra DMA)}: Šest módů (0 až 5) s rychlostmi od 16,7 MB/s do 100 MB/s.
+\end{itemize}
+
+\paragraph{Princip zapojování}
+Zařízení EIDE se připojují pomocí 40pinového plochého kabelu, který může připojit dvě zařízení (master a slave) na jeden řadič. Každé zařízení musí být správně nakonfigurováno pomocí propojovacích pinů (jumperů).
+
+\subsubsection{Rozhraní Serial ATA}
+
+\paragraph{Typy}
+Existují různé verze Serial ATA (SATA):
+\begin{itemize}
+\item \textbf{SATA I}: 1,5 Gb/s (150 MB/s).
+\item \textbf{SATA II}: 3 Gb/s (300 MB/s).
+\item \textbf{SATA III}: 6 Gb/s (600 MB/s).
+\end{itemize}
+
+\paragraph{Charakteristika}
+SATA je sériové rozhraní používané pro připojení úložišť, jako jsou pevné disky a SSD. SATA nahradilo paralelní EIDE rozhraní, poskytuje vyšší přenosové rychlosti a jednodušší kabeláž.
+
+\paragraph{Rychlosti}
+Rychlosti různých verzí SATA:
+\begin{itemize}
+\item \textbf{SATA I}: Až 1,5 Gb/s (150 MB/s).
+\item \textbf{SATA II}: Až 3 Gb/s (300 MB/s).
+\item \textbf{SATA III}: Až 6 Gb/s (600 MB/s).
+\end{itemize}
+
+\paragraph{Technologie NCQ}
+NCQ (Native Command Queuing) umožňuje pevným diskům optimalizovat pořadí vykonávání příkazů, čímž zvyšuje výkon při náhodném přístupu k datům.
+
+\paragraph{Staggered spin-up}
+Tato technologie umožňuje postupné spouštění více disků při startu systému, což snižuje zátěž na napájecí zdroj.
+
+\paragraph{Port Multiplier}
+Port Multiplier umožňuje připojení více SATA zařízení k jednomu SATA portu na řadiči, čímž zvyšuje flexibilitu a počet připojených zařízení.
+
+\paragraph{Port Selektor}
+Port Selektor umožňuje dvěma hostitelům sdílet jeden SATA zařízení, což je užitečné pro redundanci a zvýšení spolehlivosti.
+
+\paragraph{Hot Swap}
+SATA podporuje hot swap, což umožňuje připojování a odpojování zařízení bez nutnosti vypnutí systému.
+
+\subsubsection{eSATA, mSATA, M.2}
+
+\paragraph{Porovnaní}
+\begin{itemize}
+\item \textbf{eSATA}: Externí verze SATA určená pro připojení externích úložišť.
+\item \textbf{mSATA}: Mini SATA určená pro malé form factor zařízení, jako jsou notebooky.
+\item \textbf{M.2}: Moderní rozhraní pro SSD s vyššími přenosovými rychlostmi a menšími rozměry než mSATA.
+\end{itemize}
+
+\paragraph{Přenosové rychlosti}
+\begin{itemize}
+\item \textbf{eSATA}: Až 6 Gb/s (600 MB/s).
+\item \textbf{mSATA}: Až 6 Gb/s (600 MB/s).
+\item \textbf{M.2}: Až 32 Gb/s (4 GB/s) s využitím PCIe 3.0 x4.
+\end{itemize}
+
+\paragraph{Konektory}
+\begin{itemize}
+\item \textbf{eSATA}: Konektor eSATA, který je odolnější než interní SATA konektor.
+\item \textbf{mSATA}: Mini PCIe konektor.
+\item \textbf{M.2}: Konektory s různými klíči (B, M nebo B+M) pro různé typy zařízení (SATA nebo NVMe).
+\end{itemize}
+
+\subsubsection{Technologie AHCI a NVMe}
+
+\paragraph{Princip fungování}
+\begin{itemize}
+\item \textbf{AHCI (Advanced Host Controller Interface)}: Standardní rozhraní pro SATA zařízení, které podporuje pokročilé funkce, jako je NCQ a hot swap.
+\item \textbf{NVMe (Non-Volatile Memory Express)}: Moderní rozhraní pro SSD, které využívá PCIe sběrnici. NVMe poskytuje mnohem vyšší přenosové rychlosti a nižší latenci ve srovnání s AHCI díky efektivnější správě front příkazů a paralelnímu přístupu k datům.
+\end{itemize}
+
+\subsubsection{Rozhraní USB}
+
+\paragraph{Verze}
+\begin{itemize}
+\item \textbf{USB 1.0/1.1}: Až 12 Mb/s (1,5 MB/s).
+\item \textbf{USB 2.0}: Až 480 Mb/s (60 MB/s).
+\item \textbf{USB 3.0/3.1 Gen 1}: Až 5 Gb/s (625 MB/s).
+\item \textbf{USB 3.1 Gen 2}: Až 10 Gb/s (1,25 GB/s).
+\item \textbf{USB 3.2}: Až 20 Gb/s (2,5 GB/s) s použitím dvou linek.
+\item \textbf{USB4}: Až 40 Gb/s (5 GB/s).
+\end{itemize}
+
+\paragraph{Konektory}
+\begin{itemize}
+\item \textbf{USB-A}: Tradiční obdélníkový konektor.
+\item \textbf{USB-B}: Čtvercový konektor, běžný u tiskáren a dalších periferií.
+\item \textbf{Micro-USB}: Menší verze pro mobilní zařízení.
+\item \textbf{USB-C}: Oboustranný konektor, který podporuje vyšší rychlosti a větší výkon.
+\end{itemize}
+
+\paragraph{Přenosové rychlosti}
+Rychlosti různých verzí USB:
+\begin{itemize}
+\item \textbf{USB 1.0/1.1}: Až 12 Mb/s (1,5 MB/s).
+\item \textbf{USB 2.0}: Až 480 Mb/s (60 MB/s).
+\item \textbf{USB 3.0/3.1 Gen 1}: Až 5 Gb/s (625 MB/s).
+\item \textbf{USB 3.1 Gen 2}: Až 10 Gb/s (1,25 GB/s).
+\item \textbf{USB 3.2}: Až 20 Gb/s (2,5 GB/s).
+\item \textbf{USB4}: Až 40 Gb/s (5 GB/s).
+\end{itemize}
+
+\paragraph{Kompatibilita}
+Novější verze USB jsou zpětně kompatibilní s předchozími verzemi, což znamená, že starší zařízení mohou fungovat s novějšími porty, i když rychlost bude omezena na nejnižší podporovanou verzi.
+
+\subsubsection{Rozhraní Thunderbolt}
+
+\paragraph{Verze}
+\begin{itemize}
+\item \textbf{Thunderbolt 1}: Až 10 Gb/s.
+\item \textbf{Thunderbolt 2}: Až 20 Gb/s.
+\item \textbf{Thunderbolt 3}: Až 40 Gb/s.
+\item \textbf{Thunderbolt 4}: Až 40 Gb/s, zlepšená bezpečnost a požadavky na výkon.
+\end{itemize}
+
+\paragraph{Konektory}
+Thunderbolt 1 a 2 používají Mini DisplayPort konektory, zatímco Thunderbolt 3 a 4 používají USB-C konektory, které podporují vyšší rychlosti a výkon.
+
+\paragraph{Přenosové rychlosti}
+\begin{itemize}
+\item \textbf{Thunderbolt 1}: Až 10 Gb/s.
+\item \textbf{Thunderbolt 2}: Až 20 Gb/s.
+\item \textbf{Thunderbolt 3 a 4}: Až 40 Gb/s.
+\end{itemize}
+
+\paragraph{Kompatibilita}
+Thunderbolt 3 a 4 jsou zpětně kompatibilní s USB-C, což znamená, že USB-C zařízení mohou být připojena k Thunderbolt portům. Thunderbolt 3 a 4 zařízení mohou také fungovat s USB-C porty, ale s omezenými rychlostmi.

@@ -1,0 +1,183 @@
+\section{IP adresace a směrování v datových sítích}
+\subsection{Třídy adres}
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c| } 
+ \hline
+ Třída &	1. bajt & minimum & maximum & maska podsítě \\
+ A & 0–127 & 0.0.0.0 & 127.255.255.255 & 255.0.0.0 \\
+ B & 128–191 & 128.0.0.0 & 191.255.255.255 & 255.255.0.0 \\
+ C & 192–223 & 192.0.0.0 & 223.255.255.255 & 255.255.255.0 \\
+ D & 224–239 & 224.0.0.0 & 239.255.255.255 & 255.255.255.255 \\
+ E & 240–255 & 240.0.0.0 & 255.255.255.255 & - \\
+ \hline
+\end{tabular}
+\end{center}
+\paragraph{A}
+Velké sítě, například pro velké organizace a poskytovatele internetových služeb (ISP).
+\paragraph{B}
+Středně velké sítě, jako jsou střední až velké podniky.
+\paragraph{C}
+Malé sítě, jako jsou malé firmy nebo domácí sítě.
+\paragraph{D}
+Multicast.
+\paragraph{E}
+Experimentální.
+
+\subsection{Pojmy}
+\paragraph{IP adresa}
+Zkratka IP znamená Internet Protocol, což je protokol, pomocí kterého spolu komunikují všechna zařízení v internetu. IP adresa je jednoznačná identifikace konkrétního zařízení (typicky počítače) v prostředí internetu. Veškerá data (ve formě paketů), která jsou z/na dané zařízení počítačovou sítí posílána, obsahují adresu odesilatele i příjemce právě jako IP adresy.
+\paragraph{MAC adresa}
+MAC adresa (z anglického „Media Access Control“) je jednoznačný identifikátor síťového zařízení, který používají různé protokoly druhé (spojové) vrstvy OSI. Je přiřazována síťové kartě bezprostředně při její výrobě (u starších karet je přímo uložena do EEPROM paměti), a proto se jí také někdy říká fyzická adresa, nicméně ji lze u moderních karet dodatečně změnit. Ethernetová MAC adresa se skládá ze 48 bitů a podle standardu by se měla zapisovat jako šestice dvojciferných hexadecimálních čísel oddělených pomlčkami (např. 01-23-45-67-89-ab), často se však odděluje dvojtečkami (01:23:45:67:89:ab), někdy také jako tři skupiny čtyř hexadecimálních čísel (např. 0123.4567.89ab). 
+\paragraph{Síťová adresa}
+Síťová adresa je část IP adresy, která identifikuje samotnou síť, do které zařízení patří. V kontextu IP adresování se každému zařízení na síti přiděluje IP adresa, která se skládá ze dvou hlavních částí: síťové adresy a hostitelské adresy.
+\paragraph{Výchozí brána}
+Implicitní brána (anglicky default gateway) je v informatice označení pro obecný záznam ve směrovací tabulce pro cestu IP datagramu do jiné počítačové sítě pro případ, kdy cílová IP adresa zpracovávaného datagramu neodpovídá žádnému konkrétnímu záznamu ve směrovací tabulce. Implicitní brána je ve směrovací tabulce umístěna na posledním místě, čímž umožňuje v tabulce uvést seznam známých (blízkých) sítí a zbytek směrovat „do Internetu“, resp. „do nadřazené sítě“. 
+\paragraph{Všesměrová adresa}
+Všesměrová (broadcast) je adresa označující všechna připojená zařízení. Jí adresovaný paket bude přijat všemi zařízeními v dané lokální síti.
+
+\paragraph{Prefix} Prefix je část IP adresy, která identifikuje síť. Udává počet bitů v IP adrese, které jsou použity pro síťovou část adresy.
+
+\paragraph{Maska podsítě} (Subnet Mask) je 32bitové číslo, které rozděluje IP adresu na síťovou a hostitelskou část. Maska podsítě se používá k určení, do které podsítě IP adresa patří.
+
+\paragraph{VLSM} (Variable Length Subnet Mask) je metoda přiřazování různě dlouhých masek podsítí v rámci téže sítě. Umožňuje efektivnější využití IP adres, protože umožňuje vytvoření podsítí různých velikostí.
+
+\paragraph{CIDR} (Classless Inter-Domain Routing) je metoda směrování a přidělování IP adres, která nahrazuje starší systém tříd IP adres. CIDR umožňuje flexibilnější rozdělení IP adres a efektivnější využití dostupného adresního prostoru. Místo používání pevně stanovených tříd IP adres (A, B, C) používá CIDR notaci ve formátu IP adresa/síťová předpona (např. 192.168.0.0/24), kde číslo za lomítkem udává počet bitů použitých pro síťovou část adresy.
+
+\subsection{Dělení IP adres}
+\paragraph{Dynamické}
+Dynamická IP je přidělována automaticky poskytovatelem prostřednictvím DHCP serveru a routerem. Tato IP adresa je pouze dočasná a při každém novém připojení se může teoreticky změnit. V praxi je doba platnosti dynamické IP adresy různá, přes jednotky dnů až po měsíce. Nikdy tedy nemáte jistotu, kdy se Vám dynamická adresa změní.
+\paragraph{Statické}
+Pevná IP adresa je, jak název napovídá, adresa, která zůstává konstantní. To znamená, že je jednou navždy přiřazena k určitému zařízení a nezmění se, pokud se nezmění nastavení sítě. Pevné IP adresy jsou přiřazeny manuálně od správce sítě a jsou specifické pro každé zařízení.
+\paragraph{Veřejné}
+Veřejná IP adresa je používána zařízením pro komunikaci s ostatními zařízeními na internetu. Každá veřejná IP adresa je jedinečná v celosvětové síti, což znamená, že žádná dvě zařízení nemohou mít stejnou veřejnou IP adresu současně.
+\paragraph{Privátní}
+Na druhou stranu, soukromé IP adresy jsou používány v lokálních sítích (jako jsou domácí sítě, kancelářské sítě atd.) a nejsou viditelné mimo tyto sítě. Toto uspořádání umožňuje opakované použití stejných IP adres v různých sítích.
+
+\subsection{Počítání}
+ Masky sítě jsou typicky zapsány ve formě CIDR (Classless Inter-Domain Routing) notace, která určuje, kolik bitů je použito pro síť a kolik pro hostitele.
+\paragraph{Počet podsítí}
+Maska určuje, kolik bitů je určeno pro síť. Například /24 (255.255.255.0) znamená, že prvních 24 bitů je určeno pro síť.
+Počet sítí lze vypočítat jako $2^{32-n}$, kde n je délka nové masky v bitech.
+\paragraph{Počet hostů}
+\begin{enumerate}
+    \item Maska sítě se zapisuje jako číslo za lomítkem v CIDR notaci. Například /24 znamená, že prvních 24 bitů je použito pro síť, a zbylých 8 bitů je pro hostitele.
+    \item Počet hostů je dán počtem kombinací bitů pro hostitele, což se vypočítá jako $2^n-2$, kde n je počet bitů pro hostitele.
+    Dvě adresy se obvykle vyčleňují jako síťová adresa (všechny bity hostitelů jsou nastaveny na 0) a broadcast adresa (všechny bity hostitelů jsou nastaveny na 1).
+\end{enumerate}
+
+\paragraph{Všesměrové adresy}
+Broadcast adresa v síťovém kontextu se používá k odeslání dat na všechny zařízení v dané síti. Je to adresa, která má ve všech bitech hostitele nastavenou hodnotu 1.
+\begin{enumerate}
+    \item Předpokládejme, že máme IPv4 adresu sítě např. 192.168.1.0 a masku sítě např. /24 (255.255.255.0).
+    \item Převedeme masku do binárního tvaru 11111111.11111111.11111111.00000000.
+    \item Z masky sítě zjistíme, kolik bitů je určeno pro hostitele. V našem příkladě /24 znamená, že máme 8 bitů pro hostitele.
+    \item Pro výpočet broadcast adresy nastavíme všechny bity hostitele na 1 v rámci síťové adresy. 192.168.1.0 a maska 255.255.255.0. Broadcastová adresa bude 192.168.1.255. 
+\end{enumerate}
+
+\paragraph{Síťové adresy}
+Pokud máte k dispozici IP adresu hostitele a masku sítě (CIDR notaci nebo jako konkrétní IP adresu), můžete snadno spočítat adresu (pod)sítě, do které tato IP adresa patří. Postup je následující:
+\begin{enumerate}
+    \item Převod masky sítě na binární formát.
+    \item Převod IP adresy hostitele na binární formát.
+    \item Provedeme bitový logický AND mezi IP adresou hostitele a maskou sítě.
+\end{enumerate}
+
+\paragraph{Velikost bloku}
+Velikost bloku v kontextu IPv4 adresace určuje, jaký počet IP adres je obsažen v daném rozsahu adres. Tato hodnota je často důležitá pro správnou konfiguraci sítě, včetně definování rozsahu DHCP, routingových tabulek a dalších síťových nastavení. Spočítáme ji jako $2^n$, kde n je počet bitů pro hostitele.
+
+\paragraph{Wild card}
+Wildcard maska (nebo zkráceně wild card) se používá v síťových zařízeních a konfiguracích k definici, které bity IP adresy nebo sítě jsou považovány za "volné" (wild), což znamená, že jsou ignorovány při určení, zda adresa nebo síť odpovídá určitému filtru nebo pravidlu. Spočítáme ji jako invertovanou masku to znamená, že pokud máme masku např /24 (255.255.255.0) wild card maska bude 0.0.0.255.
+
+\subsection{Navrhnutí topologie sítě v rámci VLSM}
+\ToDo
+\subsection{Sumarizace}
+Sumarizací se v kontextu směrování v sítích s přepínáním paketů rozumí náhrada několika záznamů ve směrovacích informacích záznamem jedním – který popisuje cestu do všech jednotlivých sítí takto vyňatých ze směrovacích informací. Sumarizovaná cesta může zastřešovat i sítě, které v původních jednotlivých záznamech nejsou. Předpokladem možnosti sumarizace je hierarchické adresování, možnosti použití sumarizace výrazně zvyšuje geografické adresování. V topologiích pod správou link-state dynamických směrovacích protokolů je sumarizace možná pouze na hranicích oblastí. Výhodou sumarizace je zmenšení objemu směrovacích informací – úspora přenosové kapacity a urychlení práce směrovačů (méně dat, ale táž výpovědní hodnota). Za hypotetickou nevýhodu by bylo možné považovat směrování k většímu počtu cílů, které neexistují (pakety, které do cíle nedorazí, se nepřestanou zpracovávat v dřívější fázi směrování). Sumarizovaná cesta je součástí směrovacích informací právě tehdy, když je dosažitelný alespoň jeden menší celek, který tato pokrývá.
+
+
+\subsection{Charakteristika směrovače a směrovací tabulky}
+\paragraph{Směrovač}
+Router (směrovač) je v počítačových sítích aktivní síťové zařízení, které procesem zvaným routování přeposílá datagramy směrem k jejich cíli. Routování probíhá na třetí vrstvě referenčního modelu ISO/OSI (síťová vrstva). Rrouter spojuje dvě sítě a přenáší mezi nimi data. Co se děje při přijímání paketu na svém rozhrání:
+\begin{enumerate}
+    \item Směrovač přijme paket na svém rozhraní.
+    \item Packet obsahuje zdrojovou a cílovou IP adresu.
+    \item Není-li cílem samotný směrovač, nahlédne do své směrovací tabulky.
+    \item Nalezne-li zde cílovou IP adresu -> zjistí rozhraní a tam nasměruje packet.
+    \item Pokud cílovou adresu v tabulce nenajde, paket zahodí.
+\end{enumerate}
+
+\paragraph{Směrovací tabulka}
+Směrovací tabulka (anglicky routing table) je v informatice označení pro datovou strukturu uloženou v operační paměti počítače nebo routeru sloužící pro směrování dat procházejících počítačovou sítí. Obsahuje zjednodušený obraz topologie sítě, podle které systém rozhoduje, jak naložit s přijatým nebo odesílaným datagramem. Směrovací tabulka obsahuje záznamy odpovídající použitému síťovému protokolu (například TCP/IP, IPX/SPX a podobně). Pro protokoly TCP/IP je směrovací tabulka typicky implementována jako součást jádra operačního systému (tzv. TCP/IP stack).
+
+\subsection{Statické a dynamické směrování}
+\paragraph{Statické směrování}
+Statické směrování je metoda, při které administrátor ručně konfiguruje směrovací tabulky na směrovači. To znamená, že administrátor explicitně určí, které sítě nebo IP adresy jsou dostupné přes které rozhraní směrovače.
+
+\paragraph{Dynamické směrování}
+Dynamické směrování je metoda, kde směrovače automaticky vyměňují informace o sítích a dynamicky aktualizují své směrovací tabulky na základě aktuálních síťových podmínek.
+
+\subsection{Směrovací protokoly}
+\subsubsection{RIP}
+RIP (Routing Information Protocol) patří mezi nejstarší doposud používané IGP protokoly typu Distance Vector. Dodnes nachází uplatnění v malých sítích pro svou jednoduchost. Omezením protokolu je fakt, že je schopen fungovat v síti s maximálně 15 hopy (skoky, resp. směrovači v řadě za sebou). Zabrání tak routovacím smyčkám, ale zároveň je omezena velikost sítě. V tomto případě je 16 hopů bráno jako nekonečná vzdálenost a používá se pro označení nepřístupných tras. Routery využívající RIP protokol vysílají do sítě aktualizované tabulky každých 30 sekund. Moderní implementace protokolu navíc umožňují nastavení časových intervalů pro každý router zvlášť, aby směrovací tabulky nerozesílaly ve stejný okamžik a nedošlo pak k zahlcení sítě. Existují tři verze protokolu:
+\begin{enumerate}
+    \item První verze (RIPv1) používá routing podle původních tříd IPv4 adres (A, B nebo C). Aktualizace tabulek neobsahují informace o masce sítě, což znemožňuje existenci různě velkých podsítí (nemá podporu v VLSM – Variable-Length Subnet Mask). Také zde neexistuje podpora pro vzdálenou autentizaci routerů a protokol je tedy snáze napadnutelný.
+    \item Problém první verze řeší RIPv2 vyvinutý v roce 1993. Zahrnuje možnost přenášet informace o masce sítě a má podporu pro vzájemnou autentizaci routerů. Tato autentizace ovšem stále není velmi bezpečná, hesla jsou přenášena v jednoduché textové (nehashované) podobně. Protokol je při správné konfiguraci kompatibilní s verzí RIPv1.
+    \item Třetí verze nazývá RIPng (RIP next generation). Jedná se o rozšíření RIPv2 s podporou IPv6 síťování.
+\end{enumerate}
+\subsubsection{IGRP} 
+IGRP (Interior Gateway Routing Protocol) je směrovací protokol typu distance-vector. Cílem IGRP je usnadnit výměnu informací o směrování uvnitř autonomního systému (AS). Klíčové vlastnosti zahrnují:
+\begin{enumerate}
+    \item Distance-Vector protokol: IGRP používá algoritmus vzdálenost-vektor k určení nejlepší cesty k cíli. Routery pravidelně posílají aktualizace obsahující informace o jejich vzdálenosti k různým síťovým destinacím.
+    \item Měření metriky:\begin{description}
+        \item[Šířka pásma (Bandwidth)] Rychlost spojení, měří se v kilobitech za sekundu (kbps).
+        \item[Zpoždění (Delay)] Čas potřebný pro průchod paketu sítí, měří se v mikrosekundách (µs).
+        \item[Zatížení (Load)] Množství provozu na lince, měří se jako poměr mezi aktuálně využívanou kapacitou a maximální kapacitou.
+        \item[Spolehlivost (Reliability)] Statistiky chyb na lince, měří se jako poměr správných paketů vůči celkovému počtu odeslaných paketů.
+    \end{description}
+    \item Maximální dosah trasy. IGRP může podporovat dosah trasy až 255 skoků, ale výchozí hodnota je nastavena na 100 skoků.
+    \item Periodické aktualizace: Routery posílají aktualizace každých 90 sekund, ale také používají mechanismy ke snížení počtu aktualizací, když nedochází k žádným změnám v síti, čímž se snižuje síťový provoz.
+    \item Balancování zátěže nerovných nákladů: IGRP podporuje balancování zátěže mezi více cestami, které nemají stejné náklady, čímž efektivně využívá síťovou šířku pásma.
+    \item Kompatibilita a proprietárnost: IGRP je proprietární protokol společnosti Cisco, což znamená, že je primárně používán na zařízeních Cisco.
+    \item Konvergence: IGRP používá mechanismy jako "Hold-down" timery, "Split horizon" a "Poison reverse", aby snížil čas konvergence a zabránil smyčkám v směrování.
+\end{enumerate}
+IGRP byl později nahrazen pokročilejší verzí s názvem EIGRP (Enhanced Interior Gateway Routing Protocol), která přináší zlepšení v oblasti rychlosti konvergence, efektivity a flexibility.
+\subsubsection{EIGRP}
+Enhanced Interior Gateway Routing Protocol (EIGRP) je moderní směrovací protokol. EIGRP je používán routerem, aby sdílel trasy s ostatními routery v rámci stejného autonomního systému. Na rozdíl od jiných známých směrovacích protokolů, jako např. RIP (Routing Information Protocol), EIGRP posílá pouze přírůstkové aktualizace, což snižuje zátěž zařízení a množství dat, které musí být předány. V rámci aktualizací pracuje také s maskou podsítě, Hybridní směrovací protokol (Kombinace nejkratší trasy + přeskoků). Neodesíla pakety se stavem LINKY(OSPF ano), ale místo toho posíla aktualizace s vektorem vzdálenosti spolu s náklady na jejich dosažení. Pří spuštění synchronizuje smětovací tabulky mezi sousedními směrovači. Aktualizace posíla pouze při změně topologie. Maximálně 255 přeskoků (stejné jako u IGRP). Podpora sumarizačních rout. 
+
+\paragraph{Aktualizace směrovací tabulky}
+\begin{description}
+    \item[Sousedům se nezasílají celé směr. Tabulky, ale pouze jejich aktualizace] Sousedům se nezasílají celé směr. Tabulky, ale pouze jejich aktualizace.
+    \item[Po přijetí aktualizací jsou uloženy do lokální tabulky topologie] Obsahuje všechny známé trasy ke všem známým sousedům.
+    \item[Pravděpodobný následník] Trasa, jejíž oznámená vzdálenost je menší než vzdálenost pravděpodobná se označí jako záložní trasa. Možnost až 6ti pravděpodobných následníků. Do směrovací tabulky se dostane pouze ta s nejmenší metrikou.
+    \item[Následník] Nejlepší trasa do vzdálené sítě. Umístěn ve směrovací tabulce. Záloha je v podobě pravděpodobného následníka.
+\end{description}
+
+\paragraph{OSPF}
+Open Shortest Path First (OSPF) je hierarchický interní směrovací protokol, fungující na bázi link-state, tzn. každý směrovač zná strukturu celé sítě (v případě OSPF přesněji celé oblasti). OSPF je nejpoužívanějším směrovacím protokolem pro směrování uvnitř autonomních systémů. Část sítě, v níž působí OSPF, se nazývá OSPF doména.  Na rozdíl od protokolů typu distance-vector, jako je IGRP, OSPF poskytuje rychlou konvergenci a efektivnější využití síťových zdrojů.
+\begin{enumerate}
+    \item Link-State Protokol: OSPF udržuje kompletní mapu sítě v každém routeru. Každý router vytváří a udržuje topologickou databázi, která obsahuje stav všech spojení (linků) v síti.
+    \item Dijkstrův Algoritmus SPF (Shortest Path First): OSPF používá Dijkstrův algoritmus pro výpočet nejkratší cesty ke všem cílům v síti. Tento algoritmus je efektivní a zajišťuje rychlou konvergenci.
+    \item Rychlá Konvergence: OSPF rychle reaguje na změny v síti. Když dojde k výpadku spoje nebo ke změně stavu linku, OSPF okamžitě přepočítá cesty a aktualizuje směrovací tabulky.
+    \item Hierarchická Struktura: OSPF podporuje hierarchickou strukturu sítě pomocí oblastí (areas). Oblast 0 (Backbone Area) je centrální a musí být připojena ke všem ostatním oblastem. Hierarchická struktura pomáhá snižovat velikost směrovacích tabulek a zjednodušuje správu sítě.
+    \item Typy LSA (Link-State Advertisement): OSPF používá různé typy LSA k propagaci informací o síťové topologii. Mezi základní typy LSA patří: 
+    \begin{enumerate}
+        \item Typ 1: Router LSA
+        \item Typ 2: Network LSA
+        \item Typ 3: Summary LSA
+        \item Typ 4: ASBR Summary LSA
+        \item Typ 5: External LSA
+    \end{enumerate}
+    \item Autentizace: OSPF podporuje autentizaci směrovacích zpráv, což zvyšuje bezpečnost. Může používat jednoduchou textovou autentizaci nebo silnější metody, jako je MD5.
+    \item VLSM (Variable Length Subnet Masking): OSPF podporuje VLSM, což umožňuje efektivní využití IP adresového prostoru tím, že umožňuje použití různých velikostí podsíťových masek v rámci stejné sítě.
+    \item Multicast Updatey: OSPF používá multicast adresy pro zasílání aktualizací směrování (224.0.0.5 pro všechny OSPF routery a 224.0.0.6 pro designated routery), což zefektivňuje síťový provoz.
+    \item Typy OSPF Routerů
+    \begin{enumerate}
+        \item Internal Router (IR): Router, který má všechny rozhraní ve stejné OSPF oblasti.
+        \item Backbone Router (BR): Router s alespoň jedním rozhraním v oblasti 0.
+        \item Area Border Router (ABR): Router spojující více OSPF oblastí.
+        \item Autonomous System Boundary Router (ASBR): Router, který propojuje OSPF s jinými autonomními systémy
+    \end{enumerate}
+    \item Flexibilita a škálovatelnost: OSPF je vhodný pro velké a komplexní sítě díky své schopnosti pracovat v hierarchickém uspořádání a podpoře různých typů sítí (LAN, WAN, point-to-point, atd.).
+\end{enumerate}
+OSPF je široce používán ve velkých podnikových sítích a poskytovatelech internetových služeb (ISP) díky své robustnosti, rychlé konvergenci a schopnosti efektivně spravovat velké a složité síťové infrastruktury.
+
+\subsection{Ukázka prostředí Cisco packet tracer}

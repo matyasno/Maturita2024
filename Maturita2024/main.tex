@@ -1,0 +1,82 @@
+\documentclass{article}
+
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage[czech]{babel}
+\usepackage{array}
+\usepackage{listings}
+\usepackage{titlesec}
+\usepackage{xcolor}
+
+\newcommand\ToDo{\begin{center}\textcolor{red}{!DODĚLAT!}\end{center}}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.9,0.9,0.9}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{green},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    language=C
+}
+
+\lstset{
+    style=mystyle,
+}
+
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{svg}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\title{Maturita 2024}
+\author{Matyáš Noska}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+%sections
+\include{sections/1_jazyk_c/jazyk_c}
+\include{sections/2_mikroprocesor/mikroprocesor}
+\include{sections/3_pld_npld/pld_npld}
+\include{sections/4_pren_dat_roz_pam_organ/pren_dat_roz_pam_organ}
+\include{sections/5_ad_prevodiky/ad_prevodniky}
+\include{sections/6_oper_sys_plan_proc/oper_sys_plan_proc}
+\include{sections/7_synch_proc/synch_proc}
+\include{sections/8_riz_op_pam/riz_op_pam}
+\include{sections/9_riz_vnej_pam/riz_vnej_pam}
+\include{sections/10_kom_roz_dat_sit/kom_roz_dat_sit}
+\include{sections/11_IP_adr_smer_dat_sit/ip_adr_smer_dat_sit}
+\include{sections/12_unix/unix}
+\include{sections/13_fyz_struk_pev_disk_char_tech/fyz_struk_pev_disk_char_tech}
+\include{sections/14_org_struk_pev_disk_op_sys_win/org_struk_pev_disk_op_sys_win}
+\include{sections/15_soub_sys_FAT_FAT32_NFTS_exFAT/soub_sys_FAT_FAT32_NFTS_exFAT}
+\include{sections/16_zdroj_BIOS_UEFI_boot/zdroj_BIOS_UEFI_boot}
+\include{sections/17_konstr_usp_PC/konstr_usp_PC}
+\include{sections/fyz_struk_pev_disk_char_tech/fyz_struk_pev_disk_char_tech}
+%/sections
+
+\end{document}

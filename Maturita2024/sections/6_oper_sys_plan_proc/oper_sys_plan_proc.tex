@@ -1,0 +1,137 @@
+\section{Operační systém a plánovaní procesů}
+\subsection{Operační systém}
+Operační systém (OS) je základní programové vybavení počítače, které umožňuje běh programů a ovlivňuje, jak bude počítačový systém komunikovat s uživatelem. OS se zavádí do operační paměti RAM při startu PC a tam zůstává až do jeho vypnutí.
+
+\subsubsection{Kernel}
+Kernel (jádro) je základní součást operačního systému, která má na starosti správu systémových zdrojů, jako jsou procesor, paměť, a vstupně-výstupní operace. Kernel poskytuje rozhraní mezi hardwarem a softwarem a zajišťuje, aby různé programy mohly běžet současně, aniž by docházelo ke konfliktům. Jádro běží vždy v privilegovaném režimu. Systém a uživatelské programy žádají jádro o služby prostřednictvím systémových volání.
+\subsubsection{Typy jader}
+Existuje několik typů jader, které se liší svou architekturou a způsobem správy zdrojů:
+\begin{itemize}
+\item \textbf{Monolitické jádro:} Všechny základní služby operačního systému běží v rámci jediného velkého procesu v režimu jádra, což umožňuje rychlou komunikaci mezi službami, ale zvyšuje riziko chyb. Chyba jediného programu může ovlivnit další. Vylepšením tohoto konceptu je dynamické nahrávání modulů, kde je moduly možné přidávat za běhu bez nutnosti restartu. Například: MS-DOS, WIN 95/98, Mac OS.
+\item \textbf{Mikrojádro:} Základní funkce jsou minimalizovány a běží v režimu jádra, zatímco většina služeb běží jako uživatelské procesy. To zvyšuje stabilitu a bezpečnost, ale může vést ke snížení výkonu kvůli režijním nákladům na komunikaci mezi procesy kvůli vysoké zátěži IPC.
+Například: Minix, Symbian OS.
+\item \textbf{Hybridní jádro:} Kombinace přístupů monolitického a mikrojádra. Snaží se využít výhod obou přístupů, kdy některé služby běží v režimu jádra a jiné v uživatelském režimu. Například: Linux, Windows, Mac OS X.
+\item \textbf{Exo jádro:} Navržené tak, aby minimalizovalo závislost na jádře samotném. Aplikace přímo komunikují s hardwarem, což umožňuje velmi vysoký výkon, ale také klade velké nároky na vývojáře. Například: AE GIS, NEMESIS.
+\item \textbf{Nano jádro:} Menší než mikro jádro. Služby jsou v něm řešeny jako ovladače.
+\end{itemize}
+
+\subsection{Real Time Operating System}
+
+\paragraph{Popis a výhody RTOS}
+Jednoduché vestavěné systémy jsou ovládány pomocí supersmyčky, která obsahuje globální proměnné. Jedná se o nejjednodušší způsob, jak naprogramovat CPU, avšak každý krok musí čekat, než na něj přijde řada. Složité systémy používají Real Time Operating System (RTOS), kde jednotlivé programové funkce tvoří samostatné úlohy – tasky. Provádění úloh řídí krátkodobý plánovač – scheduler. RTOS je operační systém, který poskytuje možnost reagovat na události v okolí počítače průběžně, tj. v reálném čase. RTOS poskytuje uživateli (nebo programátorovi) záruky, že je určitou činnost v určitém časovém úseku možné dokončit. RTOS je používán například v embedded systémech, robotice, automatizaci, elektronických měřeních nebo v telekomunikacích.
+
+\paragraph{Výhody RTOS, jako je například RTX Keil, zahrnují:}
+\begin{itemize}
+    \item \textbf{Task Scheduling:} Tasky jsou volány v případě potřeby, což zajišťuje lepší výkon a odpověď na události.
+    \item \textbf{Multitasking:} Umožňuje provádění několika tasků současně.
+    \item \textbf{Deterministické chování:} Události a přerušení jsou zpracovány ve vymezeném čase.
+    \item Každý task je přidělen určitému místu zásobníku, což umožňuje předvídatelné využití paměti.
+\end{itemize}
+
+\subsection{Procesy a vlákna}
+\paragraph{Proces}
+Proces je základní jednotka zpracování v operačním systému. Jedná se o instanci programu, která je spuštěna a běží v paměti. Každý proces má vlastní adresní prostor, což zajišťuje, že procesy navzájem neovlivňují svou činnost. Proces je umístěn v operační paměti v podobě sledu strojových instrukcí vykonávané procesorem. Jeden program může v PC běžet jako více procesů s různými daty (více krát spuštěný web zobrazující různé stránky). Správu procesů vykonává OS, který zajištuje jejich běh, přiděluje jim systémové prostředky PC a umožnuje uživateli procesy spravovat – spouštět, ukončovat,…
+\paragraph{Proces v operačním systému (OS) je definován:}
+\begin{itemize}
+    \item Identifikátorem – PID (Process ID)
+    \item Programem, který je řízen
+    \item Obsahem registrů – čítačem instrukcí, adresou zásobníku
+    \item Daty
+\end{itemize}
+
+\paragraph{Procesů běží v OS mnoho a je nutné je spravovat. Správa procesů zahrnuje:}
+\begin{itemize}
+    \item \textbf{Proces management:} Správa procesů.
+    \item \textbf{Přepínání kontextů:} Velmi náročné, vede k vzniku vláken.
+    \item \textbf{Plánovač (dispatcher):} Plánuje na základě plánovacího algoritmu.
+    \item \textbf{Správa paměti:} Řízení využití paměti procesy.
+    \item \textbf{Podpora meziprocesorové komunikace:} Umožňuje komunikaci mezi procesy.
+\end{itemize}
+
+\paragraph{Proces se může nacházet v 5ti stavech:}
+\begin{enumerate}
+    \item \textbf{NEW (nový)}
+    \begin{itemize}
+        \item \textit{Popis:} Proces byl právě vytvořen.
+        \item \textit{Vytvoření:} Může být vytvořen buď na základě příkazu uživatele, nebo na žádost operačního systému.
+        \item \textit{Akce:} Strojový kód procesu je zaveden do operační paměti pomocí scheduleru (plánovače).
+    \end{itemize}
+    
+    \item \textbf{READY (připravený)}
+    \begin{itemize}
+        \item \textit{Popis:} Proces je připraven k provádění.
+        \item \textit{Čekání:} Čeká pouze na přidělení procesoru.
+        \item \textit{Stav:} Proces je umístěn do fronty připravených procesů, kde čeká, až na něj přijde řada.
+    \end{itemize}
+    
+    \item \textbf{RUN (běžící)}
+    \begin{itemize}
+        \item \textit{Popis:} Procesu byl přidělen procesor a právě provádí své instrukce.
+        \item \textit{Aktivita:} Proces běží a vykonává své operace na procesoru.
+        \item \textit{Přepnutí:} Může být přepnut do stavu WAIT (čekající), pokud potřebuje čekat na vstupně-výstupní operace, nebo zpět do READY, pokud je vyřazen z procesoru plánovačem.
+    \end{itemize}
+    
+    \item \textbf{WAIT (čekající, blokovaný)}
+    \begin{itemize}
+        \item \textit{Popis:} Proces čeká na dokončení nějaké vstupně-výstupní operace nebo na skončení jiného procesu.
+        \item \textit{Čekání:} Proces je umístěn do fronty čekajících procesů.
+        \item \textit{Přechod:} Po obsloužení vstupně-výstupní operace nebo po přijetí potřebného signálu se přesune zpět do fronty READY.
+    \end{itemize}
+    
+    \item \textbf{END (ukončený)}
+    \begin{itemize}
+        \item \textit{Popis:} Proces dokončil svou činnost a byl ukončen.
+        \item \textit{Akce:} Proces uvolňuje všechny přidělené prostředky (paměť, soubory atd.) a je odstraněn z operačního systému.
+    \end{itemize}
+    
+\end{enumerate}
+
+
+\paragraph{Vlákno}
+Vlákno je lehčí jednotka zpracování než proces. Vlákna sdílejí adresní prostor a zdroje procesu, což umožňuje efektivnější komunikaci a synchronizaci. Více vláken v rámci jednoho procesu může běžet současně, což zvyšuje výkon aplikací využívajících paralelní zpracování.
+
+\subsection{PCB a TCB}
+\paragraph{PCB (Process Control Block)}
+PCB je datová struktura v operačním systému, která obsahuje informace o procesu. Tyto informace zahrnují stav procesu, identifikátor procesu (PID), informace o paměti, plánovací informace a další. Každý proces má sví PCB. Obsah PCB: 
+\begin{itemize}
+    \item \textbf{Ukazatel:} Odkaz na další PCB.
+    \item \textbf{Stav proces:} V jakém stavu se momentálně proces nachází.
+    \item \textbf{PID:} ID procesu.
+    \item \textbf{Program counter:} Adresa následující strojové instrukce.
+    \item \textbf{Registry procesoru}
+    \item \textbf{Limit paměti}
+    \item \textbf{Seznam otevřených souborů}
+    \item \textbf{Priorita, kdy naposledy běžel, jak dlouho...}
+\end{itemize}
+
+\paragraph{TCB (Thread Control Block)}
+TCB je podobný PCB, ale obsahuje informace o jednotlivých vláknech v rámci procesu. Zahrnuje stav vlákna, identifikátor vlákna (TID), ukazatele zásobníku a další informace potřebné pro správu vláken.
+
+\subsection{Přepínání kontextu}
+Přepínání kontextu je proces, při kterém operační systém ukládá stav aktuálně běžícího procesu nebo vlákna a načítá stav jiného procesu nebo vlákna. To umožňuje více procesům a vláknům sdílet CPU, a je základem pro multitasking.
+
+\subsection{Plánovače OS}
+\paragraph{Preemptivní a nepreemptivní plánování}
+\begin{itemize}
+\item \textbf{Preemptivní plánování:} Umožňuje operačnímu systému přerušit běžící proces nebo vlákno a přiřadit CPU jinému procesu nebo vláknu. To zajišťuje rychlejší odezvu systému a lepší využití zdrojů.
+\item \textbf{Nepreemptivní plánování:} Proces nebo vlákno běží až do svého dokončení nebo do doby, kdy se dobrovolně vzdá CPU. Tento typ plánování je jednodušší, ale může vést k horší odezvě systému.
+\end{itemize}
+
+\subsection{Plánovací algoritmy}
+\paragraph{FCFS (First-Come, First-Served)}
+Algoritmus, který přiřazuje CPU procesům v pořadí, ve kterém dorazily. Je jednoduchý, ale může vést k dlouhým čekacím dobám, pokud první proces trvá dlouho.
+
+\paragraph{SJF (Shortest Job First)}
+Algoritmus, který přiřazuje CPU procesu s nejkratší dobou potřebnou k dokončení. Minimalizuje průměrnou čekací dobu, ale vyžaduje znalost doby běhu procesů, což nemusí být vždy možné.
+
+\paragraph{SRTF (Shortest Remaining Time First)}
+Preemptivní verze SJF. Kdykoliv nový proces dorazí, algoritmus zkontroluje, zda má kratší zbývající dobu než aktuální proces. Pokud ano, nový proces přebírá CPU.
+
+\paragraph{RR (Round Robin)}
+Algoritmus, který přiřazuje CPU procesům na pevně stanovený časový úsek (kvantum). Po uplynutí kvanta je proces zařazen zpět do fronty, pokud není dokončen. Tento přístup zajišťuje rovnoměrné rozdělení CPU mezi procesy a zlepšuje odezvu systému.
+
+\paragraph{PS (Priority Scheduling)}
+Algoritmus, který přiřazuje CPU procesům na základě jejich priority. Procesy s vyšší prioritou jsou upřednostňovány před procesy s nižší prioritou. Může být preemptivní nebo nepreemptivní.
+
+\paragraph{MFQS (Multilevel Feedback Queue Scheduling)}
+Komplexní algoritmus, který používá několik front s různými prioritami. Procesy mohou přecházet mezi frontami na základě jejich chování a času stráveného na CPU. Tento algoritmus se snaží kombinovat výhody různých plánovacích metod a přizpůsobit se aktuálním požadavkům systému.

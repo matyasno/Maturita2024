@@ -1,0 +1,103 @@
+\subsection{Typy a charakteristika sběrnic}
+
+\subsubsection{Charakteristika sběrnice}
+Sběrnice je komunikační systém, který přenáší data mezi různými komponenty počítače. Hlavní charakteristiky sběrnic zahrnují:
+
+\begin{itemize}
+\item \textbf{Datová šířka}: Počet bitů, které mohou být přenášeny současně. Širší sběrnice umožňují rychlejší přenos dat.
+\item \textbf{Taktovací frekvence}: Rychlost, kterou sběrnice pracuje, měřená v hertzech (Hz). Vyšší frekvence znamená rychlejší přenos dat.
+\item \textbf{Propustnost (bandwidth)}: Maximální množství dat, které může sběrnice přenést za jednotku času, obvykle měřeno v megabajtech za sekundu (MB/s) nebo gigabajtech za sekundu (GB/s).
+\item \textbf{Přístupová doba}: Doba čekání na uvolnění sběrnice.
+\end{itemize}
+
+\subsubsection{Paralelní a sériové sběrnice}
+\begin{itemize}
+\item \textbf{Paralelní sběrnice}: Přenáší více bitů současně po několika vodičích. Příklad: ISA, PCI. Výhody zahrnují vyšší datovou propustnost, ale mohou trpět problémy s interferencí a synchronizací.
+\item \textbf{Sériové sběrnice}: Přenáší data bit po bitu po jediném vodiči. Příklad: USB, PCI-E. Výhody zahrnují menší počet vodičů, což může vést k menší složitosti a vyšší rychlosti přenosu na delší vzdálenosti.
+\end{itemize}
+
+\paragraph{Typy vodičů sběrnic}
+\begin{itemize}
+    \item \textbf{Řídící}: Slouží k řízení komunikace. CLK, MEM read/write...
+    \item \textbf{Adresové}: Slouží k přenosu informací o paměťov adrese, na kterou se má přistupovat během čtení nebo zápisu dat. 
+    \item \textbf{Datové}: Slouží k posílání dat.
+\end{itemize}
+
+\subsubsection{Sběrnice ISA, PCI, AGP, PCI-X - konektory, datové š  ířky, takt, frekvence a přenosové rychlosti}
+\begin{itemize}
+\item \textbf{ISA (Industry Standard Architecture)}:
+\begin{itemize}
+\item \textbf{Konektory}: 8bitové a 16bitové sloty.
+\item \textbf{Datová šířka}: 8 bitů (PC/XT) nebo 16 bitů (AT).
+\item \textbf{Taktovací frekvence}: 8 MHz.
+\item \textbf{Přenosové rychlosti}: Až 8 MB/s.
+\end{itemize}
+
+
+\item \textbf{EISA (Enhanced Industry Standard Architecture)}:
+\begin{itemize}
+\item \textbf{Datová šířka}: 8 bitů, 16 bitů nebo 32 bitů.
+\item \textbf{Taktovací frekvence}: 8 MHz.
+\item \textbf{Přenosové rychlosti}: Až 33 MB/s.
+\item \textbf{Kompatabilita s ISA}: Je zpětně kompatabilní s ISA. Má stejnou velikost jako ISA a stejné vývody (62 + 36) a má navíc ještě 59 vývodů umístěných mezi starými vývody ISA (při zasunutí do ISA sběrnice zůstanou nezapojeny
+\end{itemize}
+
+
+\item \textbf{PCI (Peripheral Component Interconnect)}:
+\begin{itemize}
+\item \textbf{Konektory}: 32bitové a 64bitové sloty.
+\item \textbf{Datová šířka}: 32 bitů nebo 64 bitů.
+\item \textbf{Taktovací frekvence}: 33 MHz (běžné) nebo 66 MHz.
+\item \textbf{Přenosové rychlosti}: Až 533 MB/s (66 MHz, 64 bitů).
+\end{itemize}
+\item \textbf{AGP (Accelerated Graphics Port)}:
+\begin{itemize}
+\item \textbf{Konektory}: Speciální slot pro grafické karty.
+\item \textbf{Datová šířka}: 32 bitů.
+\item \textbf{Taktovací frekvence}: 66 MHz (AGP 1x).
+\item \textbf{Přenosové rychlosti}: Až 2,133 GB/s (AGP 8x).
+\end{itemize}
+\item \textbf{PCI-X (PCI Extended)}:
+\begin{itemize}
+\item \textbf{Konektory}: 64bitové sloty.
+\item \textbf{Datová šířka}: 64 bitů.
+\item \textbf{Taktovací frekvence}: 66, 133, 266 nebo 533 MHz.
+\item \textbf{Přenosové rychlosti}: Až 4,3 GB/s (533 MHz, 64 bitů).
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Sběrnice PCI-E}
+
+\paragraph{Charakteristika}
+PCI-E (Peripheral Component Interconnect Express) je moderní sériová sběrnice používaná pro připojení rozšiřujících karet, jako jsou grafické karty, síťové karty a SSD. PCI-E poskytuje vysokou propustnost a flexibilitu díky své škálovatelné architektuře.
+
+\paragraph{Princip fungování}
+PCI-E používá point-to-point topologii, což znamená, že každé zařízení má vlastní dedikované spojení s řadičem, čímž se eliminuje sdílení šířky pásma mezi zařízeními.
+
+\paragraph{Datový pár}
+Každý link (link) PCI-E se skládá z jednoho datového páru pro přenos (TX) a jednoho datového páru pro příjem (RX), což umožňuje obousměrný přenos dat.
+
+\paragraph{Link}
+PCI-E link je základní jednotkou přenosu, která může mít šířku x1, x2, x4, x8, x16 nebo x32. Každé zvětšení šířky linku zvyšuje dostupnou šířku pásma.
+
+\paragraph{Kompatibilita}
+PCI-E je zpětně kompatibilní, což znamená, že zařízení PCI-E mohou být použita v jakémkoli slotu, který je fyzicky kompatibilní, i když maximální šířka pásma bude omezena nejnižším společným faktorem mezi slotem a zařízením.
+
+\paragraph{Verze}
+Různé verze PCI-E nabízejí různé rychlosti přenosu dat:
+\begin{itemize}
+\item \textbf{PCI-E 1.0}: 2,5 GT/s (giga transferů za sekundu) na link (až 8 GB/s na x16 slot).
+\item \textbf{PCI-E 2.0}: 5 GT/s na link (až 16 GB/s na x16 slot).
+\item \textbf{PCI-E 3.0}: 8 GT/s na link (až 32 GB/s na x16 slot).
+\item \textbf{PCI-E 4.0}: 16 GT/s na link (až 64 GB/s na x16 slot).
+\item \textbf{PCI-E 5.0}: 32 GT/s na link (až 128 GB/s na x16 slot).
+\end{itemize}
+
+\paragraph{Kódování}
+PCI-E 1.0 a 2.0 používají 8b/10b kódování, což znamená, že 10 bitů je přenášeno pro každý 8bitový datový bajt. PCI-E 3.0 a novější používají 128b/130b kódování, které je efektivnější a snižuje overhead.
+
+\paragraph{Přenosové rychlosti}
+Přenosové rychlosti se zvyšují s každou verzí PCI-E díky vyššímu počtu gigatransferů za sekundu (GT/s) a efektivnějšímu kódování dat.
+
+\paragraph{Souvislost s chipsetem}
+Chipset na základní desce obsahuje řadič PCI-E, který spravuje komunikaci mezi procesorem a zařízeními připojenými přes PCI-E sběrnici. Moderní chipsety mohou podporovat různé konfigurace PCI-E linek, což umožňuje flexibilní připojení a optimalizaci pro různé typy zařízení.

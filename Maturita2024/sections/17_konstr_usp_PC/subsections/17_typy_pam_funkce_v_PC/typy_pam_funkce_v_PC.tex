@@ -1,0 +1,70 @@
+\subsection{Typy pamětí a jejich funkce v PC}
+
+\subsubsection{Popis funkcí pamětí v PC a jejich vzájemné souvislosti}
+V osobních počítačích (PC) existuje několik různých typů pamětí, z nichž každý má specifickou funkci a roli v celkovém provozu systému. Níže jsou uvedeny hlavní typy pamětí a jejich funkce:
+
+\paragraph{ROM}
+ROM (Read-Only Memory) je nevolatilní paměť, což znamená, že data v ní uložená nejsou ztracena, když je počítač vypnutý. ROM je používána k ukládání firmwaru – základního softwaru, který inicializuje a testuje hardware při spuštění systému a poskytuje základní funkcionalitu potřebnou pro spuštění operačního systému.
+
+\paragraph{BIOS}
+BIOS (Basic Input/Output System) je specifický typ firmwaru uloženého v ROM. BIOS inicializuje hardware během procesu bootování (spouštění) počítače a poskytuje nízkoúrovňové ovládání pro hardware, jako je klávesnice, displej a úložná zařízení. Po inicializaci předá BIOS kontrolu nad systémem operačnímu systému.
+
+\paragraph{CMOS}
+CMOS (Complementary Metal-Oxide-Semiconductor) je technologie použitá pro výrobu integrovaných obvodů. V kontextu počítačů se termín CMOS často vztahuje na malý paměťový čip, který uchovává nastavení BIOSu, jako jsou datum a čas, konfigurace bootování a další systémové parametry. Tento čip je napájen malou baterií, aby si uchoval data i při vypnutí počítače.
+
+\paragraph{RAM}
+RAM (Random Access Memory) je volatilní paměť, což znamená, že data v ní uložená jsou ztracena, když je počítač vypnutý. RAM slouží jako pracovní prostor pro operační systém a aplikace, kde mohou rychle přistupovat a manipulovat s daty. Existují různé typy RAM, včetně DRAM a SDRAM.
+
+\paragraph{DRAM}
+DRAM (Dynamic Random Access Memory) je typ paměti RAM, která ukládá každý bit dat v separátním kondenzátoru uvnitř integrovaného obvodu. Kondenzátory v DRAM musí být pravidelně obnovovány (refresh), aby uchovaly uložená data. DRAM je hojně používána jako hlavní systémová paměť díky své vysoké hustotě a relativně nízkým nákladům.
+
+\paragraph{SDRAM}
+SDRAM (Synchronous Dynamic Random Access Memory) je typ DRAM, který je synchronizován s systémovým sběrnicovým hodinovým signálem. To umožňuje vyšší rychlosti přenosu dat tím, že SDRAM může začít nový úkol ve stejném cyklu, kdy dokončí předchozí úkol. SDRAM je běžná ve většině moderních počítačů.
+
+\paragraph{DDR 1, 2, 3, 4}
+\begin{itemize}
+\item \textbf{DDR1}: První generace DDR paměti, která zdvojnásobila přenosovou rychlost oproti původní SDRAM. Napájení 2,5V. 184 vývodů.
+\item \textbf{DDR2}: Nabízí vyšší rychlosti a nižší spotřebu energie než DDR1. Napájení 1,8V. 240 vývodů.
+\item \textbf{DDR3}: Dále zvyšuje přenosovou rychlost a snižuje napětí potřebné pro provoz. Napájení 1,5V. 240 Vývodů.
+\item \textbf{DDR4}: Nabízí ještě vyšší rychlosti, větší kapacitu paměti a lepší energetickou účinnost než předchozí generace.
+\end{itemize}
+
+\paragraph{Technologie přenosu dat}
+\begin{itemize}
+    \item SDR - Single data rate je technologie, která umožnuje přenos dat pouze na spádovou nebo náběžnou hranu clk.
+    \item DDR - Double data rate umožnuje přenos jak na nábežnou tak spádovou hranu clk.
+    \item QDR - Quad data rate má 2 nezávislé datové kanály pro čtení a zápis a umožnuje zápis i čtení současně při spádové a náběžné hraně.
+\end{itemize}
+
+\paragraph{Paměťové moduly}
+\begin{itemize}
+    \item SIMM - 32 bit šířka přenosu. Starší.
+    \item DIMM - 64 bit šířka přenosu. 168 - 240 vývodů.
+    \item SO-DIMM - Menší alternativa DIMM, z důvodu úspory místa (notebook)
+\end{itemize}
+
+\subsubsection{Časování paměti (latence) a Dual Channel}
+\paragraph{Latence}
+Latence paměti je doba potřebná k provedení různých operací. Udává ze v taktech.
+
+\begin{itemize}
+    \item tRCD - RAS to CAS delay. Časová prodleva od okamžiku, kdy je vybrán řádek do doby, kdy je možné vybrat sloupec a potvrdit jej signálem CAS.
+    \item tCL - CAS delay.  Počet taktů potřebný k získání informace z pamětové buňky poté, kdy byl vybrán její sloupec. Má největší vliv na paměť.
+    \item tRP - RAS recharge time. Počet taktů nutný pro ukončení přístupu k jednomu řádku paměti a pro zahájení přístupu k řádku jinému.
+    \item tRAS - Active to Precharge Delay. Nejmenší počet taktů, po které musí být řádek aktivní, než může být opět deaktivován.
+\end{itemize}
+
+\paragraph{Dual channel}
+Dual Channel je technologie, která umožňuje dvoukanálový přístup k paměti, čímž se zdvojnásobí teoretická šířka pásma paměti. Toho je dosaženo použitím dvou paměťových modulů stejné kapacity a rychlosti, které pracují paralelně. Dual Channel může výrazně zvýšit výkon systému, zejména v aplikacích náročných na paměť.
+
+\subsubsection{Logická struktura operační paměti}
+Logická struktura operační paměti popisuje způsob, jakým je paměť organizována a přístupná systémem a aplikacemi.
+
+\paragraph{Base}
+Base paměť odkazuje na první 640 KB paměti v klasických počítačích kompatibilních s IBM PC. Tato oblast paměti je vyhrazena pro operační systém, BIOS a základní I/O operace. V dnešních počítačích tato koncepce již není tak významná, ale termín může být stále používán v určitých kontextech historického softwaru a hardwaru.
+
+\paragraph{UMA}
+UMA (Upper Memory Area) odkazuje na oblast paměti mezi 640 KB a 1 MB v klasických počítačích kompatibilních s IBM PC. Tato oblast byla historicky využívána pro BIOS, video paměť a další systémové funkce. Přístup k této oblasti mohl být komplikovaný a vyžadoval speciální techniky pro efektivní využití.
+
+\paragraph{XMS}
+XMS (Extended Memory Specification) je standard pro přístup k paměti nad 1 MB v reálném režimu procesorů x86. XMS umožňuje aplikacím přístup k většímu množství paměti, než je dostupné v základní a UMA paměti, což umožňuje efektivnější využití paměti v systémech s více než 1 MB RAM.

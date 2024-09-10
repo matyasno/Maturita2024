@@ -1,0 +1,67 @@
+4w\subsection{Sockety, chlazení, chipsety}
+
+\subsubsection{Vnitřní struktura a popis částí základní desky}
+Základní deska (motherboard) je hlavní tištěný spoj v počítači, který propojuje všechny ostatní komponenty a umožňuje jejich vzájemnou komunikaci. Klíčové části základní desky zahrnují:
+
+\begin{itemize}
+\item \textbf{Socket pro procesor (CPU)}: Fyzické rozhraní, do kterého je instalován procesor. Různé typy socketů jsou kompatibilní s různými procesory.
+\item \textbf{Paměťové sloty (RAM slots)}: Sloty pro instalaci paměťových modulů (RAM).
+\item \textbf{Chipset}: Soustava čipů, která řídí komunikaci mezi procesorem, pamětí a periferiemi. Dělí se na Northbridge a Southbridge.
+\item \textbf{PCIe sloty}: Sloty pro rozšiřující karty, jako jsou grafické karty, zvukové karty nebo síťové karty.
+\item \textbf{SATA a M.2 konektory}: Konektory pro připojení úložných zařízení, jako jsou pevné disky (HDD), solid-state disky (SSD) a optické mechaniky.
+\item \textbf{Napájecí konektory}: Konektory pro připojení napájecích kabelů z napájecího zdroje.
+\item \textbf{BIOS/UEFI čip}: Paměťový čip, který obsahuje základní firmware pro inicializaci hardwaru při startu systému.
+\item \textbf{USB, audio a síťové konektory}: Externí konektory pro připojení periferních zařízení, jako jsou myši, klávesnice, reproduktory a síťové kabely.
+\end{itemize}
+
+\subsubsection{Chipset}
+Chipset je soubor elektronických součástek na základní desce, které řídí komunikaci mezi procesorem, pamětí a periferiemi. Chipset je často rozdělen na dvě hlavní části:
+
+\begin{itemize}
+\item \textbf{Northbridge}: Tento čip zajišťuje komunikaci mezi procesorem, pamětí (RAM) a grafickou kartou (pokud je integrována). V moderních systémech je jeho funkce často integrována přímo do procesoru.
+\item \textbf{Southbridge}: Tento čip zajišťuje komunikaci mezi procesorem a periferiemi, jako jsou pevné disky, USB porty, síťové karty a další vstupní/výstupní zařízení.
+\end{itemize}
+
+\subsubsection{Socket}
+Socket je fyzické rozhraní na základní desce, do kterého je instalován procesor. Různé procesory vyžadují různé typy socketů, což určuje kompatibilitu mezi základní deskou a procesorem.
+
+\paragraph{Typy}
+Existují různé typy socketů, například:
+\begin{itemize}
+\item \textbf{LGA (Land Grid Array)}: Používá kontaktní plochy na procesoru, které se dotýkají pinů v socketu (např. LGA 1151, LGA 1200).
+\item \textbf{PGA (Pin Grid Array)}: Používá piny na procesoru, které se zasouvají do otvorů v socketu (např. PGA 940).
+\item \textbf{BGA (Ball Grid Array)}: Používá kuličky na procesoru, které se pájí přímo na desku, což zajišťuje pevné spojení (běžné v mobilních a integrovaných zařízeních).
+\end{itemize}
+
+\paragraph{AMD vs. Intel}
+AMD a Intel, dva hlavní výrobci procesorů, používají odlišné sockety:
+\begin{itemize}
+\item \textbf{AMD}: Běžné sockety zahrnují AM4 (pro Ryzen procesory), TR4 (pro Threadripper procesory).
+\item \textbf{Intel}: Běžné sockety zahrnují LGA 1151, LGA 1200 (pro Core procesory) a LGA 2066 (pro High-End Desktop procesory).
+\end{itemize}
+
+\subsubsection{Vliv zátěže a taktovací frekvence na spotřebu}
+Taktovací frekvence procesoru (měřená v GHz) a zátěž, pod kterou procesor pracuje, mají přímý vliv na spotřebu energie. Vyšší taktovací frekvence zvyšuje výkon procesoru, ale zároveň zvyšuje jeho spotřebu energie a generování tepla. Při vyšší zátěži procesor spotřebovává více energie, protože musí pracovat intenzivněji, což také vede k většímu zahřívání.
+
+\subsubsection{TDP a návrhy chlazení}
+TDP (Thermal Design Power) je měření maximálního množství tepla, které procesor nebo jiný komponent může vyprodukovat a které musí být rozptýleno chladicím systémem. TDP je důležitý parametr při návrhu chladicích řešení, protože určuje, jaký typ a kapacitu chladiče je třeba použít, aby se komponenty nepřehřívaly.
+
+\subsubsection{Typy a charakteristika chlazení procesoru, Heat pipe}
+Existují různé typy chlazení procesoru:
+
+\begin{itemize}
+\item \textbf{Vzduchové chlazení}: Používá ventilátory a chladiče (heatsinky) k rozptylování tepla. Chladič je často vyroben z hliníku nebo mědi, které dobře vedou teplo.
+\item \textbf{Kapalinové chlazení}: Používá kapalinu (obvykle vodu) k odvodu tepla od procesoru pomocí vodního bloku, pumpy, hadic a radiátoru. Kapalinové chlazení je efektivnější než vzduchové a je vhodné pro vysokovýkonné systémy.
+\item \textbf{Heat pipe}: Tepelné trubice (heat pipes) jsou používány ve vzduchových chladičích pro zlepšení odvodu tepla. Trubice obsahují kapalinu, která se odpařuje při kontaktu s horkým povrchem a kondenzuje při kontaktu s chladným povrchem, což efektivně přenáší teplo.
+\end{itemize}
+
+\subsubsection{Technologie TCC, EIST, Intelligent Power Capability, Cool'n'Quiet a Turbo Boost}
+Různé technologie a funkce pro řízení výkonu a spotřeby procesorů zahrnují:
+
+\begin{itemize}
+\item \textbf{TCC (Thermal Control Circuit)}: Technologie, která monitoruje teplotu procesoru a automaticky snižuje taktovací frekvenci a napětí, pokud teplota přesáhne určitou hranici, aby se zabránilo přehřátí.
+\item \textbf{EIST (Enhanced Intel SpeedStep Technology)}: Technologie společnosti Intel, která dynamicky upravuje taktovací frekvenci a napětí procesoru v závislosti na aktuální zátěži, čímž optimalizuje spotřebu energie a snižuje produkci tepla.
+\item \textbf{Intelligent Power Capability}: Technologie, která umožňuje procesoru inteligentně řídit svůj výkon a spotřebu energie podle aktuálních požadavků systému, což zlepšuje energetickou účinnost.
+\item \textbf{Cool'n'Quiet}: Technologie společnosti AMD, která snižuje taktovací frekvenci a napětí procesoru v době nízké zátěže, což vede k nižší spotřebě energie a menšímu hluku.
+\item \textbf{Turbo Boost}: Technologie společnosti Intel, která umožňuje procesoru automaticky zvýšit taktovací frekvenci nad základní úroveň, pokud to termální a energetické podmínky dovolují. To zvyšuje výkon procesoru při zátěži vyžadující vyšší výpočetní výkon.
+\end{itemize}

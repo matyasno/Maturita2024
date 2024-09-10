@@ -1,0 +1,75 @@
+\section{Synchronizace procesů}
+
+Synchronizace procesů je klíčová oblast v návrhu a implementaci paralelních a distribuovaných systémů. Zabývá se metodami a technikami, které umožňují více procesům nebo vláknům bezpečně sdílet prostředky a koordinovat svou činnost, aniž by došlo k nekonzistentním nebo nesprávným stavům systému.
+
+\subsection{Kritická sekce}
+Kritická sekce je část kódu, která přistupuje ke sdílenému prostředku, jako je proměnná, soubor nebo jiný zdroj, který nesmí být současně upravován více než jedním procesem nebo vláknem. Řešení kritické sekce je zásadní pro zajištění správné synchronizace procesů a prevenci závodních podmínek (race conditions).
+
+\paragraph{Podmínky pro ošetření kritické sekce}
+
+Aby bylo možné správně ošetřit kritickou sekci, musí být splněny následující podmínky:
+\begin{itemize}
+    \item Pouze jeden proces může být v kritické sekci najednou.
+    \item Řešní nesmí mít vliv na počet CPU.
+    \item Žádný proces mimo kritickou sekci nesmí blokovat jiný proces ke vstupu do kritické sekce.
+    \item Existuje hranice, po kterou může proces čekat na vstup do kritické sekce, což znamená, že žádný proces nečeká nekonečně dlouho.
+\end{itemize}
+
+\paragraph{Aktivní a pasivní čekání}
+\begin{itemize}
+    \item Aktivní čekání (Busy Waiting): Proces neustále kontroluje podmínku, aby zjistil, zda může vstoupit do kritické sekce. To může vést k plýtvání procesorovým časem.
+    \item Pasivní čekání (Passive Waiting): Proces čeká, aniž by spotřebovával procesorový čas, často použitím synchronizačních primitiv jako jsou semafory nebo řídící signály.
+\end{itemize}
+\subsection{Sdílený prostředek}
+Sdílený prostředek je jakýkoliv zdroj, který může být přistupován více než jedním procesem nebo vláknem současně. Typické příklady zahrnují proměnné v paměti, soubory na disku, tiskárny a další hardware. Správné řízení přístupu ke sdíleným prostředkům je klíčové pro zajištění konzistence a správné funkčnosti systému.
+
+\subsection{Řešení kritické sekce}
+
+Existuje několik klasických řešení problému kritické sekce, která zajišťují správnou synchronizaci procesů:
+
+\paragraph{Zákaz přerušení}
+Tento přístup zahrnuje zákaz všech přerušení při vstupu do kritické sekce a jejich povolení při opuštění kritické sekce. Toto řešení je jednoduché, ale neškálovatelné, protože neřeší synchronizaci mezi více procesory nebo jádry. Nevhodné především z toho důvodu, protože uživatelský proces zasahuje do chodu systému tím, že zakáže přerušení.
+
+\paragraph{Zamykací proměnná}
+Použití zamykací proměnné (lock) umožňuje procesům signalizovat svůj záměr vstoupit do kritické sekce. Proces, který chce vstoupit do kritické sekce, nejprve získá zámek. Pokud je zámek již obsazen, proces čeká. Může nastat situace, kde proces, který vstupuje do kritické sekce nestihne tuto proměnnou přepnout a druhý proces začne taktéž vstupovat do kritické sekce(2 procesy se nachází v kritické sekci).
+
+\paragraph{Přesné střídání}
+
+Tento přístup zajišťuje, že procesy se střídají v přístupu ke kritické sekci podle pevně daného pořadí. To zajišťuje vzájemné vyloučení, ale může vést k neefektivnímu využití procesorového času.
+
+\paragraph{Petersonovo řešení}
+
+Petersonovo řešení je algoritmus, který umožňuje dvěma procesům bezpečně sdílet kritickou sekci pomocí dvou proměnných: jedné pro indikaci zájmu o vstup do kritické sekce a druhé pro určení pořadí vstupu.
+
+\paragraph{Atomická instrukce}
+
+Atomické instrukce, jako je test-and-set nebo compare-and-swap, umožňují implementovat synchronizační mechanismy bez rizika přerušení. Tyto instrukce jsou prováděny jako nedělitelné operace, což zajišťuje jejich bezpečnost při paralelním provádění.
+
+\paragraph{Sleep() a Wakeup()}
+
+Tyto funkce umožňují procesům přejít do režimu spánku a čekat na událost, aniž by spotřebovávaly procesorový čas. Funkce wakeup() probudí spící proces, což umožňuje efektivnější synchronizaci než aktivní čekání.
+
+\paragraph{Semafory a transakce}
+Semafory jsou synchronizační primitiva, která řídí přístup ke sdíleným prostředkům pomocí počítadla. Existují dva základní typy semaforů: binární semafory a počítané semafory. Transakce jsou větší koncepty, které zahrnují skupinu operací, které musí být provedeny atomicky, což znamená, že buď všechny operace jsou úspěšně dokončeny, nebo žádná z nich není provedena.
+
+\subsection{Synchronizační problémy}
+
+Synchronizační problémy vznikají, když více procesů nebo vláken přistupuje ke sdíleným prostředkům bez řádné koordinace, což může vést k nekonzistentním nebo nesprávným stavům. Zde jsou uvedené příklady, které nám můžou blíže přiblížit tyto problémy: 
+
+\begin{itemize}
+    \item \textbf{Producent vs. konzument}
+    Problematika producenta a konzumenta je klasickým problémem synchronizace v programování, kde se jedná o koordinaci dvou typů procesů: producentů, kteří generují data do společného bufferu, a konzumentů, kteří tato data zpracovávají. Cílem je zajistit, aby producenti nevkládali data do plného bufferu a konzumenti neodebírali data z prázdného bufferu.
+    \item \textbf{Čtenáři vs. písaři}
+    Tento problém se zabývá situací, kdy více procesů nebo vláken potřebuje přístup ke sdílenému zdroji, který může být čten a zapisován. Cílem je umožnit více čtenářům současně přístup ke zdroji, ale zajistit, aby písaři měli výhradní přístup, když potřebují psát, čímž se zabrání inkonzistencím. Existují 2 varianty tohoto problému:
+        \begin{enumerate}
+            \item \textbf{1. Preferování písařů}
+            Pokud čeká písař, noví čtenáři musí počkat, dokud není zápis dokončen.
+            \item \textbf{2. Preferování čtenářů}
+            Pokud je 1 čtenář aktivní, nový čtenář může okamžitě začít číst, i když čeká písař.
+        \end{enumerate}
+    \item \textbf{Večeřící filozofové}
+    ento problém modeluje situaci, kde filozofové střídavě jedí a myslí, přičemž sdílejí omezený počet prostředků (příborů). Cílem je zajistit, aby filozofové mohli bezpečně jíst bez uváznutí (deadlock) nebo vyhladovění (starvation). Představte si pět filozofů sedících kolem kulatého stolu. Mezi každým párem sousedních filozofů leží jedna vidlička (příbor). Aby filozof mohl jíst, potřebuje obě vidličky po své levici a pravici. Filozof může jíst, pokud jsou obě vidličky volné, jinak musí čekat.
+    \item \textbf{Spící holič}
+    Holič obslouží zákazníka a jde se podívat do čekárny. Pokud v čekárně nikdo není uspí se. Jakmile přijde zákazník, přijde rovnou za holičem a vzbudí ho. Problém nastává v moment, kdy se oba na cestě minou. To znamená že holič doholí a jde se podívat do čekárny. V ten samý okamžik ale přišel zákazník a zjistil že u holiče nikdo není. Minou se a navzájem tak čekají.
+\end{itemize}
+

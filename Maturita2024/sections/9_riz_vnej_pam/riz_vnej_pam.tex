@@ -1,0 +1,38 @@
+\section{Řízení vnější paměti}
+\subsection{Charakteristika HDD}
+Pevné disky (HDD) jsou tradiční úložná zařízení, která využívají rotační magnetické plotny k ukládání dat. Hlavní výhodou HDD je jejich vysoká kapacita za relativně nízkou cenu. Avšak rychlost čtení a zápisu je omezená mechanickými pohyby čtecích/zapisovacích hlav a otáčením ploten. Další nevýhodou je také mechanické řešení, které je velmi náchilné na poškození.
+
+\subsection{Metody přidělování místa na disku}
+\paragraph{Spojité}
+Spojitá alokace místa na disku vyžaduje, aby každý soubor byl uložen v jedné souvislé sekvenci bloků. Výhodou této metody je rychlý přístup k souborům a snadná správa indexů. Nevýhodou je fragmentace disku a problém s nalezením dostatečně velkého souvislého prostoru pro nové soubory. Pří přídelování místá se řídí alokačními algoritmy - First fit, last fit, best fit, worst fit.
+
+\paragraph{Spojitý seznam}
+Při použití spojitého seznamu jsou bloky souboru rozděleny a uloženy na různých místech disku. Každý blok obsahuje odkaz na následující blok souboru. Tato metoda eliminuje problém s hledáním souvislého prostoru, ale přístup k datům je pomalejší kvůli nutnosti procházení seznamu.
+
+\paragraph{Indexová alokace}
+Indexová alokace používá speciální indexový blok, který obsahuje seznam všech bloků, jež tvoří soubor. To umožňuje rychlý přístup k jednotlivým blokům souboru a eliminuje fragmentaci. Nevýhodou je, že vyžaduje dodatečné úložné místo pro indexové bloky.
+
+\subsection{Plánovací metody přístupu na disk}
+\paragraph{FCFS}
+První přijde, první je obsloužen (First-Come, First-Served) je jednoduchá plánovací metoda, která obsluhuje požadavky v pořadí, v jakém byly přijaty. Tato metoda je spravedlivá, ale může vést k dlouhým čekacím dobám.
+
+\paragraph{SSTF}
+Nejkratší čas k obsluze (Shortest Seek Time First) vybere požadavek, který vyžaduje nejmenší přesun čtecí hlavy. Tím se snižuje celková doba hledání, ale může způsobovat hladovění požadavků, které jsou daleko.
+
+\paragraph{SCAN}
+Metoda SCAN (také známá jako "elevator algorithm") pohybuje čtecí hlavou tam a zpět přes disk a obsluhuje požadavky v pořadí, jak je míjí. Tím se snižuje čekací doba pro požadavky, které jsou blízko sebe.
+
+\paragraph{C-SCAN}
+Kruhový SCAN (Circular SCAN) je varianta SCAN, která po dosažení konce disku rychle vrací čtecí hlavu zpět na začátek a pokračuje v obsluze požadavků. Tím je zajištěna rovnoměrnější distribuce čekacích dob.
+
+\paragraph{LOOK}
+Metoda LOOK je podobná SCAN, ale čtecí hlava se pohybuje jen do té doby, dokud jsou v daném směru požadavky. Po jejich obsloužení se směr mění.
+
+\paragraph{C-LOOK}
+Kruhový LOOK je varianta LOOK, která po dosažení posledního požadavku v jednom směru okamžitě přeskočí na první požadavek v opačném směru, čímž zajišťuje rovnoměrné čekací doby.
+
+\subsection{HDD vs. SSD}
+\paragraph{Defragmentace}
+Defragmentace je proces reorganizace dat na pevném disku (HDD) tak, aby byly souvislé a přístup k nim byl rychlejší. V důsledku fragmentace, která nastává při běžném používání disku, se soubory rozdělí do nesouvislých bloků, což zvyšuje dobu potřebnou pro jejich načtení. Defragmentace přeskupí tyto bloky do souvislých sekvencí, čímž optimalizuje výkon disku.
+
+U SSD (Solid State Drive) defragmentace není potřebná a může být dokonce škodlivá. SSD disky využívají flash paměť, která nemá pohyblivé části, a přístupový čas je téměř stejný pro všechny části disku. Fragmentace tedy neovlivňuje výkon SSD jako u HDD. Navíc časté přepisování bloků během defragmentace může snížit životnost SSD, protože flash paměť má omezený počet zápisových cyklů. Proto moderní operační systémy a nástroje správy disků defragmentaci SSD disků neprovádějí.

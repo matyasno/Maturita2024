@@ -1,0 +1,218 @@
+\section{Přenos dat, rozdělení pamětí a jejich organizace}
+\subsection{Sériový a paralelní přenos}
+\paragraph{Sériový přenos}
+\begin{itemize}
+    \item \textbf{Definice}: Sériový přenos je metoda, při které jsou data přenášena bit po bitu po jedné lince nebo kanálu.
+    \item \textbf{Vlastnosti}:
+    \begin{itemize}
+        \item \textbf{Jedna linka}: Využívá pouze jednu linku pro přenos dat.
+        \item \textbf{Rychlost}: Sériový přenos může být pomalejší pro krátké vzdálenosti, ale je efektivnější pro delší vzdálenosti.
+        \item \textbf{Příklady}: USB, RS-232, RS-485, I2C, SPI.
+        \item \textbf{Výhody}: Menší rušení, menší počet vodičů, jednodušší kabeláž.
+        \item \textbf{Nevýhody}: Nižší rychlost přenosu pro krátké vzdálenosti ve srovnání s paralelním přenosem.
+    \end{itemize}
+\end{itemize}
+
+\paragraph{Paralelní přenos}
+\begin{itemize}
+    \item \textbf{Definice}: Paralelní přenos je metoda, při které jsou data přenášena po několika linkách současně.
+    \item \textbf{Vlastnosti}:
+    \begin{itemize}
+        \item \textbf{Více linek}: Využívá více linek (obvykle tolik, kolik bitů je v jedné datové jednotce, například 8, 16, nebo 32).
+        \item \textbf{Rychlost}: Vysoká rychlost přenosu pro krátké vzdálenosti, protože více bitů je přenášeno současně.
+        \item \textbf{Příklady}: Starší počítačové sběrnice jako PCI, starší tiskárny používající paralelní porty.
+        \item \textbf{Výhody}: Vysoká přenosová rychlost pro krátké vzdálenosti.
+        \item \textbf{Nevýhody}: Vyšší nároky na kabeláž (více vodičů), větší rušení, problém s synchronizací dat na delší vzdálenosti.
+    \end{itemize}
+\end{itemize}
+
+%včetně vytvoření sběrnice?
+\paragraph{Připojení s otevřeným kolektorem}
+\begin{itemize}
+    \item \textbf{Definice}: Připojení s otevřeným kolektorem je způsob připojení, kde je výstupní tranzistor obvodu připojený ke kolektoru, který není přímo spojen s napájecím napětím, ale je dostupný externímu obvodu.
+    \item \textbf{Princip fungování}:
+    \begin{itemize}
+        \item Tranzistor se otevře (zapne), když je na bázi přítomen dostatečný proud, což umožní proud proudit z kolektoru do emitoru.
+        \item Když je tranzistor vypnutý, kolektor je v podstatě odpojen od obvodu, což umožňuje použít externí pull-up rezistor k napájení kolektoru.
+    \end{itemize}
+    \item \textbf{Výhody}:
+    \begin{itemize}
+        \item Možnost snadného připojení více výstupů na jednu sběrnici (wire-AND logika).
+        \item Vysoká odolnost proti rušení.
+    \end{itemize}
+    \item \textbf{Nevýhody}:
+    \begin{itemize}
+        \item Potřeba externího pull-up rezistoru.
+        \item Pomalejší rychlost přepínání kvůli kapacitě a hodnotě pull-up rezistoru.
+    \end{itemize}
+    \item \textbf{Příklady použití}: Komunikační sběrnice jako I2C, logické brány v digitálních obvodech.
+\end{itemize}
+
+\paragraph{Třístavový zesilovač}
+\begin{itemize}
+    \item \textbf{Definice}: Třístavový zesilovač je typ logického obvodu, který může být v jednom ze tří stavů: logická 1, logická 0, nebo vysoká impedance (odpojený stav).
+    \item \textbf{Princip fungování}:
+    \begin{itemize}
+        \item Kromě vstupů pro logickou hodnotu (0 nebo 1) má třístavový zesilovač také vstup pro řízení povolení (enable).
+        \item Když je povolovací vstup aktivní, zesilovač předává vstupní signál na výstup.
+        \item Když je povolovací vstup neaktivní, výstup je odpojen (vysoká impedance), což umožňuje sdílet výstupní linku s jinými obvody.
+    \end{itemize}
+    \item \textbf{Výhody}:
+    \begin{itemize}
+        \item Umožňuje sdílení jedné výstupní linky více zařízeními bez rizika konfliktu signálů.
+        \item Flexibilita v návrhu digitálních systémů.
+    \end{itemize}
+    \item \textbf{Nevýhody}:
+    \begin{itemize}
+        \item Komplexnější řízení, aby nedošlo ke konfliktu signálů.
+    \end{itemize}
+    \item \textbf{Příklady použití}: Datové sběrnice (např. systémová sběrnice v počítačích), paměťové moduly, mikroprocesorové systémy.
+\end{itemize}
+
+\subsection{Popis vybraných sběrnic}
+\paragraph{$I^2$C}
+\begin{itemize}
+    \item \textbf{Definice}: I2C (Inter-Integrated Circuit) je víceúčelová sériová sběrnice, kterou vyvinula společnost Philips.
+    \item \textbf{Vlastnosti}:
+    \begin{itemize}
+        \item Half-duplex.
+        \item Používá dvě hlavní linie: SDA (Serial Data Line) a SCL (Serial Clock Line).
+        \item Umožňuje připojení více master a slave zařízení na jednu sběrnici.
+        \item Podporuje adresování až 128 zařízení na jedné sběrnici.
+    \end{itemize}
+    \item \textbf{Výhody}: Jednoduchost, nízké nároky na kabeláž, podpora více zařízení.
+    \item \textbf{Nevýhody}: Relativně nízká rychlost přenosu, omezená délka sběrnice.
+    \item \textbf{Příklady použití}: Senzory, displeje, paměťové moduly.
+\end{itemize}
+
+\paragraph{SPI}
+\begin{itemize}
+    \item \textbf{Definice}: SPI (Serial Peripheral Interface) je synchronní sériová komunikace vyvinutá společností Motorola.
+    \item \textbf{Vlastnosti}:
+    \begin{itemize}
+        \item Používá čtyři hlavní linie: SCLK (Serial Clock), MOSI (Master Out Slave In), MISO (Master In Slave Out), SS (Slave Select).
+        \item Full-duplex přenos dat.
+        \item Rychlá komunikace díky synchronnímu přenosu.
+    \end{itemize}
+    \item \textbf{Výhody}: Vysoká rychlost, jednoduchá implementace, full-duplex přenos.
+    \item \textbf{Nevýhody}: Vyšší počet vodičů, omezený počet připojených zařízení.
+    \item \textbf{Příklady použití}: Paměťové čipy, senzory, displeje.
+\end{itemize}
+
+\paragraph{RS-232}
+\begin{itemize}
+    \item \textbf{Definice}: RS-232 (Recommended Standard 232) je standard pro sériovou komunikaci, vyvinutý asociací EIA.
+    \item \textbf{Vlastnosti}:
+    \begin{itemize}
+        \item Asynchronní přenos dat.
+        \item Používá signály jako TX (Transmit), RX (Receive), RTS (Request to Send), CTS (Clear to Send).
+        \item Maximální délka kabelu až 15 metrů při nižších rychlostech.
+    \end{itemize}
+    \item \textbf{Výhody}: Jednoduchost, široká kompatibilita.
+    \item \textbf{Nevýhody}: Omezená rychlost, citlivost na rušení.
+    \item \textbf{Příklady použití}: Modemy, terminály, průmyslové zařízení.
+\end{itemize}
+
+\paragraph{IEEE 1284}
+\begin{itemize}
+    \item \textbf{Definice}: IEEE 1284 je standard pro paralelní komunikaci mezi počítačem a periferními zařízeními.
+    \item \textbf{Vlastnosti}:
+    \begin{itemize}
+        \item Podporuje vysokorychlostní přenosy dat.
+        \item Kompatibilní s původním Centronics paralelním portem.
+        \item Více režimů přenosu (např. kompatibilní mód, nibble mód, ECP, EPP).
+    \end{itemize}
+    \item \textbf{Výhody}: Vysoká rychlost přenosu, robustnost.
+    \item \textbf{Nevýhody}: Větší počet vodičů, omezená délka kabelu.
+    \item \textbf{Příklady použití}: Tiskárny, skenery, externí disky.
+\end{itemize}
+
+\paragraph{USB}
+\begin{itemize}
+    \item \textbf{Definice}: USB (Universal Serial Bus) je standard pro připojení periferních zařízení k počítači.
+    \item \textbf{Vlastnosti}:
+    \begin{itemize}
+        \item Používá sériovou komunikaci.
+        \item Podpora Plug and Play.
+        \item Možnost napájení připojených zařízení.
+    \end{itemize}
+    \item \textbf{Výhody}: Vysoká rychlost přenosu, jednoduchost připojení, široká kompatibilita.
+    \item \textbf{Nevýhody}: Omezená délka kabelu, potřeba driverů.
+    \item \textbf{Příklady použití}: Klávesnice, myši, tiskárny, externí disky, USB flash disky.
+\end{itemize}
+
+\subsection{Rozdělení pamětí v PC včetně jejich popisu}
+\paragraph{RAM}
+\begin{itemize}
+    \item \textbf{Definice}: RAM (Random Access Memory) je typ paměti, která umožňuje přístup k jakékoli paměťové buňce přímo.
+    \item \textbf{Vlastnosti}:
+    \begin{itemize}
+        \item Rychlý přístup k datům.
+        \item Volatilní paměť (data se ztrácí při vypnutí napájení).
+        \item Používá se jako operační paměť v počítačích.
+    \end{itemize}
+    \item \textbf{Typy}:
+    \begin{itemize}
+        \item DRAM (Dynamic RAM): Používá kondenzátory, které vyžadují pravidelné obnovování.
+        \item SRAM (Static RAM): Používá bistabilní klopné obvody, nevyžaduje obnovování.
+    \end{itemize}
+\end{itemize}
+
+\paragraph{ROM}
+\begin{itemize}
+    \item \textbf{Definice}: ROM (Read-Only Memory) je typ paměti, do které nelze běžně zapisovat data, ale lze je z ní pouze číst.
+    \item \textbf{Vlastnosti}:
+    \begin{itemize}
+        \item Nevolatilní paměť (data se neztrácí při vypnutí napájení).
+        \item Obsahuje firmware a základní programy pro spuštění počítače.
+    \end{itemize}
+    \item \textbf{Typy}:
+    \begin{itemize}
+        \item PROM (Programmable ROM): Paměť, kterou lze naprogramovat pouze jednou.
+        \item EPROM (Erasable Programmable ROM): Paměť, kterou lze vymazat pomocí UV světla a znovu naprogramovat.
+        \item EEPROM (Electrically Erasable Programmable ROM): Paměť, kterou lze elektricky vymazat a znovu naprogramovat.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Organizace paměti}
+\paragraph{Kapacita}
+\begin{itemize}
+    \item \textbf{Definice}: Kapacita paměti udává celkové množství dat, které může paměť uchovat.
+    \item \textbf{Jednotky}: Bity, byty, kilobyty (KB), megabyty (MB), gigabyty (GB), terabyty (TB).
+\end{itemize}
+
+\paragraph{Hloubka}
+\begin{itemize}
+    \item \textbf{Definice}: Hloubka paměti udává počet adresovatelných buněk v paměti.
+    \item \textbf{Výpočet}: Hloubka paměti se často udává jako 2 na n-tou, kde n je počet adresních linek.
+\end{itemize}
+
+\paragraph{Délka datového slova}
+\begin{itemize}
+    \item \textbf{Definice}: Délka datového slova udává počet bitů, které mohou být současně zapsány nebo přečteny z paměti.
+    \item \textbf{Příklady}: 8 bitů, 16 bitů, 32 bitů, 64 bitů.
+\end{itemize}
+
+\paragraph{Paměťová mapa}
+\begin{itemize}
+    \item \textbf{Definice}: Paměťová mapa je schéma, které ukazuje rozložení paměťových oblastí v adresním prostoru počítače nebo mikrokontroléru.
+    \item \textbf{Význam}: 
+    \begin{itemize}
+        \item Umožňuje efektivní organizaci a přístup k různým typům paměti, jako jsou RAM, ROM, I/O porty a speciální registry.
+        \item Pomáhá při ladění a optimalizaci programů, protože programátor může přesně určit, kde se nachází jednotlivé proměnné a kódy.
+    \end{itemize}
+    \item \textbf{Příklady použití}:
+    \begin{itemize}
+        \item \textbf{ROM oblast}: Obsahuje firmware a základní vstupně-výstupní systém (BIOS).
+        \item \textbf{RAM oblast}: Používá se pro dynamická data a běžící programy.
+        \item \textbf{I/O oblast}: Prostor vyhrazený pro komunikaci s periferiemi jako jsou klávesnice, myši, tiskárny.
+        \item \textbf{Speciální registry}: Používají se pro řízení hardwaru, jako jsou časovače a řadiče přerušení.
+    \end{itemize}
+    \item \textbf{Příklad paměťové mapy}:
+    \begin{itemize}
+        \item \textbf{0x0000 - 0x7FFF}: ROM oblast
+        \item \textbf{0x8000 - 0xBFFF}: RAM oblast
+        \item \textbf{0xC000 - 0xCFFF}: I/O oblast
+        \item \textbf{0xD000 - 0xFFFF}: Speciální registry
+    \end{itemize}
+\end{itemize}

@@ -1,0 +1,59 @@
+\section{Fyzická struktura pevných disků, charakteristiky a technologie}
+\subsection{Princip magnetického záznamu a čtení dat}
+Magnetický záznam a čtení dat na pevném disku (HDD) využívá princip magnetizace. Povrch ploten disku je pokryt tenkou vrstvou magnetického materiálu, který může být magnetizován ve dvou různých směrech, reprezentujících binární hodnoty 0 a 1. Při zápisu dat mění záznamová hlava orientaci magnetických domén na povrchu ploten. Při čtení dat čtecí hlava detekuje změny v magnetizaci a tyto změny jsou pak interpretovány jako binární data.
+
+\subsection{Základní pojmy}
+\begin{itemize}
+    \item Plotna: Kruhový disk pokrytý magnetickým materiálem, který ukládá data.
+    \item Hlava: Komponenta, která provádí čtení a zápis dat na plotny.
+    \item Aktuator: Mechanismus, který pohybuje hlavami nad povrchem ploten.
+    \item Řadič disku: Elektronický obvod, který ovládá činnost disku a komunikuje s počítačem.
+\end{itemize}
+\subsection{Geometrie HDD}
+\paragraph{Stopa}
+Stopa je kruhová dráha na povrchu plotny, kde jsou data ukládána. Každá plotna je rozdělena do mnoha stop soustředěných kolem středu plotny.
+
+\paragraph{Sektor}
+Sektor je nejmenší jednotka záznamu na stopě. Každý sektor má typicky kapacitu 512 bajtů nebo 4096 bajtů (4KB).
+
+\paragraph{Cylindr}
+Cylindr je sada stop na všech plotnách pevného disku, které jsou ve stejné vzdálenosti od středu. Přístup k datům v rámci jednoho cylindru je rychlejší, protože hlavy nemusí měnit svou pozici.
+
+\subsection{Vystavovací mechanizmy}
+Vystavovací mechanismy zajišťují přesné umístění čtecích/zapisovacích hlav nad správnou stopou. Nejčastěji používané mechanismy jsou krokové motory a servomechanizmy. Krokové motory pohybují hlavami v malých krocích, zatímco servomechanizmy využívají zpětné vazby pro přesné umístění hlav.
+
+\subsection{Teplotní kalibrace}
+Teplotní kalibrace kompenzuje změny v rozměrech mechanických částí pevného disku způsobené teplotními výkyvy. Tato kalibrace zajišťuje, že čtecí a zapisovací hlavy zůstanou přesně zarovnané nad správnými stopami, což je klíčové pro spolehlivý záznam a čtení dat.
+
+\subsection{Přístupová doba}
+Přístupová doba je čas potřebný k nalezení a načtení dat z pevného disku. Skládá se z:
+\begin{itemize}
+    \item Doby hledání (seek time): Čas potřebný k přesunutí čtecí hlavy na správnou stopu.
+    \item Latence: Čas, během kterého se plotna otočí a sektor se dostane pod čtecí hlavu.
+    \item Doby přenosu: Čas potřebný k přenosu dat z disku do paměti počítače.
+\end{itemize}
+\subsection{Kódování}
+Kódování je proces převodu binárních dat do formátu vhodného pro magnetický záznam. Různé kódovací metody jako NRZ (Non-Return-to-Zero), MFM (Modified Frequency Modulation) a RLL (Run Length Limited) jsou používány k optimalizaci hustoty záznamu a spolehlivosti čtení.
+
+\subsection{Prekompenzace}
+Prekompenzace je technika používaná ke kompenzaci interferencí mezi sousedními magnetickými doménami při zápisu dat na disk. Tato interferencia může vést k chybnému čtení dat. Prekompenzace upravuje časování a amplitudu zápisu tak, aby se minimalizovaly chyby způsobené blízkostí magnetických domén.
+
+\subsection{ZBR, MTBF, SMART}
+\paragraph{ZBR}
+Zónový bitový záznam (Zoned Bit Recording) je metoda, která umožňuje různé hustoty záznamu v různých částech ploten. Plotny jsou rozděleny do zón a každá zóna může mít různé množství sektorů na stopě. To umožňuje efektivnější využití povrchu plotny a zvyšuje celkovou kapacitu disku.
+
+\paragraph{MTBF}
+Střední doba mezi poruchami (Mean Time Between Failures) je statistická odhadovaná doba, po kterou může zařízení pracovat bez poruchy. U pevných disků se MTBF udává v hodinách a poskytuje představu o spolehlivosti disku.
+
+\paragraph{SMART}
+Self-Monitoring, Analysis, and Reporting Technology je systém monitorování a analýzy stavu pevného disku. SMART sleduje různé parametry disku, jako jsou teplota, počet přemapovaných sektorů a rychlost čtení/zápisu. Pokud některý z parametrů překročí stanovené limity, SMART varuje uživatele před možným selháním disku.
+
+\subsection{Technologie SMR, HAMR a MAMR}
+\paragraph{SMR}
+Shingled Magnetic Recording (SMR) je technologie záznamu, která umožňuje vyšší hustotu dat na pevném disku tím, že překrývá stopy jako šindele na střeše. To zvyšuje kapacitu disku, ale může zhoršit výkon při zápisu, protože přepisování jedné stopy může vyžadovat přepisování sousedních stop.
+
+\paragraph{HAMR}
+Heat-Assisted Magnetic Recording (HAMR) je technologie, která využívá lokální ohřev laserem ke snížení koercitivity magnetického materiálu, což umožňuje hustší záznam dat. Po zahřátí a zápisu se materiál rychle ochladí a stabilizuje, což umožňuje uložit více dat na stejnou plochu.
+
+\paragraph{MAMR}
+Microwave-Assisted Magnetic Recording (MAMR) je technologie, která využívá mikrovlnné záření k usnadnění změny magnetického stavu záznamového média. Mikrovlny snižují potřebnou sílu pro magnetizaci domén, což umožňuje hustší záznam dat a zvyšuje kapacitu disku bez nutnosti výrazně zvyšovat teplotu jako u HAMR.

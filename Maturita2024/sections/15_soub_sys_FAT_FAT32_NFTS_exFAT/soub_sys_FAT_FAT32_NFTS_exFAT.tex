@@ -1,0 +1,66 @@
+\section{Souborové systémy FAT a FAT32, NTFS a exFAT}
+\subsection{Struktura logického disku, číslování sektorů, cluster}
+\paragraph{Struktura logického disku}
+Logický disk je strukturován do několika klíčových oblastí: zaváděcí sektor (boot sector), tabulka rozdělení (partition table), hlavní souborová tabulka (file allocation table, FAT) a oblasti dat. Tyto oblasti jsou organizovány tak, aby umožňovaly efektivní správu souborů a adresářů na disku.
+
+\paragraph{Číslování sektorů}
+Sektory jsou základní jednotky uložení dat na disku a jsou číslovány sekvenčně počínaje nulou. Každý sektor má typicky velikost 512 bajtů. Adresování sektorů umožňuje operačnímu systému přistupovat k jednotlivým částem disku a číst nebo zapisovat data.
+
+\paragraph{Cluster}
+Cluster je skupina sektorů, která tvoří nejmenší alokační jednotku na disku. Souborový systém přiděluje místo na disku v jednotkách clusterů. Velikost clusteru může být různá v závislosti na velikosti disku a typu souborového systému. Používání clusterů snižuje overhead spojený s řízením diskového prostoru, ale může také vést k interní fragmentaci, kdy malé soubory zabírají více místa, než je skutečně potřeba.
+
+\subsection{Zaváděcí záznam, hlavní adresář, struktura podadresářů}
+\paragraph{Zaváděcí záznam}
+Zaváděcí záznam (boot record) je první sektor na disku nebo oddílu, který obsahuje kód potřebný k zavedení operačního systému. Tento sektor také obsahuje informace o struktuře disku, jako je typ souborového systému, velikost oddílu a umístění hlavních oblastí souborového systému.
+
+\paragraph{Hlavní adresář}
+Hlavní adresář (root directory) je první adresář na disku, který obsahuje záznamy o všech souborech a podadresářích v nejvyšší úrovni souborového systému. U FAT a FAT32 je hlavní adresář umístěn na pevně stanoveném místě na disku, zatímco u NTFS a exFAT může být hlavní adresář dynamicky umístěn.
+
+\paragraph{Struktura podadresářů}
+Podadresáře jsou strukturovány hierarchicky, kde každý adresář může obsahovat odkazy na soubory i další podadresáře. U FAT a FAT32 jsou podadresáře realizovány jako lineární seznamy záznamů, zatímco u NTFS je použit B-strom, který umožňuje rychlejší přístup k souborům a lepší správu prostoru.
+
+\subsection{Typy FAT}
+\paragraph{FAT}
+File Allocation Table (FAT) je jednoduchý souborový systém, který používá tabulku pro sledování alokace diskových prostorů. Každý záznam v tabulce FAT odpovídá jednomu clusteru na disku a obsahuje informace o tom, zda je cluster volný, obsazený, nebo zda je posledním clusterem souboru.
+
+\paragraph{VFAT}
+Virtual File Allocation Table (VFAT) je rozšíření systému FAT, které přidává podporu pro dlouhé názvy souborů až do 255 znaků. VFAT je kompatibilní se staršími verzemi FAT, které podporovaly pouze 8+3 formát názvů souborů.
+
+\paragraph{VFAT16}
+VFAT16 je kombinace VFAT a FAT16, která umožňuje dlouhé názvy souborů a podporuje disky až do velikosti 2 GB. Tento systém je používán především ve starších verzích operačních systémů, jako je Windows 95 a Windows 98.
+
+\paragraph{VFAT32}
+VFAT32 je kombinace VFAT a FAT32, která podporuje dlouhé názvy souborů a umožňuje práci s disky většími než 2 GB. VFAT32 je široce používán v moderních verzích operačních systémů a na přenosných úložných zařízeních, jako jsou USB flash disky.
+
+\paragraph{Řešení dlouhých názvů}
+VFAT používá speciální záznamy v adresáři k ukládání dlouhých názvů souborů, které jsou kompatibilní se staršími 8+3 formáty názvů souborů. Každý dlouhý název je rozdělen na více záznamů, které jsou propojeny tak, aby tvořily celý název.
+
+\paragraph{Chyby FAT systému}
+Chyby v systému FAT mohou zahrnovat poškození tabulky alokace souborů, ztrátu záznamů adresáře a problémy s konzistencí dat. Tyto chyby mohou vést k ztrátě dat a je důležité pravidelně provádět kontrolu integrity systému FAT pomocí nástrojů, jako je chkdsk.
+
+\subsection{Bezpečné odstranění dat, fragmentace, defragmentace}
+\paragraph{Bezpečné odstranění dat}
+Bezpečné odstranění dat zahrnuje přepsání dat na disku, aby byla zajištěna jejich neobnovitelnost. Jednoduché smazání souborů obvykle pouze označí místo jako volné, zatímco skutečná data zůstávají na disku a mohou být obnovena. Nástroje pro bezpečné odstranění dat, jako je DBAN nebo funkce "secure erase" v moderních operačních systémech, přepisují data jednou nebo vícekrát.
+
+\paragraph{Fragmentace}
+Fragmentace nastává, když jsou soubory rozděleny do nesouvislých bloků na disku. To se děje během opakovaného zapisování, mazání a změny velikosti souborů. Fragmentace může zpomalit přístup k datům, protože čtecí hlava musí přeskakovat mezi různými částmi disku.
+
+\paragraph{Defragmentace}
+Defragmentace je proces, který přeskupuje fragmentované části souborů a sjednocuje volný prostor na disku. To zvyšuje výkon systému, protože umožňuje rychlejší přístup k souborům. Moderní operační systémy často provádějí defragmentaci automaticky, zatímco u starších systémů je potřeba spustit nástroj pro defragmentaci ručně.
+
+\subsection{NTFS}
+\paragraph{Struktura logického disku NTFS}
+Struktura NTFS (New Technology File System) zahrnuje hlavní oblasti: zaváděcí sektor, hlavní souborovou tabulku (MFT), záznamy metadat a oblast dat. MFT obsahuje informace o všech souborech a adresářích na disku, včetně jejich atributů a umístění dat.
+
+\paragraph{Metasoubory a jejich funkce}
+Metasoubory v NTFS jsou speciální systémové soubory, které obsahují kritické informace o struktuře souborového systému. Patří mezi ně:
+\begin{itemize}
+    \item \$MFT: Hlavní souborová tabulka, která obsahuje záznamy o všech souborech a adresářích.
+    \item \$MFTMirr: Kopie prvních čtyř záznamů MFT pro zvýšení spolehlivosti.
+    \item \$LogFile: Záznam transakcí, který pomáhá při obnově systému po selhání.
+    \item \$Bitmap: Bitmapa volného a obsazeného místa na disku.
+    \item \$Boot: Záznam zaváděcího sektoru, který obsahuje kód potřebný pro spuštění systému.
+    \item \$BadClus: Záznam o poškozených clusterech na disku.
+    \item \$Secure: Informace o bezpečnostních záležitostech, jako jsou přístupová práva.
+\end{itemize}
+NTFS poskytuje vysokou úroveň spolehlivosti, bezpečnosti a efektivity při správě dat na moderních pevných discích.
